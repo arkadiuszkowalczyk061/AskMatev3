@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ueue</title>
-</head>
-<body>
-    {% for question in questions %}
-        <label>Title: </label>
-        {{ question['Title'] }}<br>
-        <label>Description: </label>
-        {{ question['Description'] }}<br>
-    {% endfor %}
+{% extends 'layout.html' %}
 
-
-</body>
-</html>
+<title>{{ title }}</title>
+{% block content %}
+    <p>{{ message }}</p>
+    <form action="{{ url_for('index') }}" method="post">
+        <label>Add an answer</label><br>
+        <textarea name="Description" id="Description" rows="5" cols="60"></textarea><br>
+        <input type="submit">
+    </form>
+{% endblock content %}

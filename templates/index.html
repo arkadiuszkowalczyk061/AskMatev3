@@ -29,10 +29,13 @@ h2 {
 </head>
 <body>
     <table>
+        {% for title in titles %}
+            <th>{{ title }}</th>
+        {% endfor %}
         {% for row in questions %}
             <tr>
                 {% for value in row %}
-                    <td>{{ value }}</td>
+                    <td><a href="{{ url_for('display_question', id = row[0]) }}">{{ value }}</a></td>
                 {% endfor %}
             </tr>
         {% endfor %}
