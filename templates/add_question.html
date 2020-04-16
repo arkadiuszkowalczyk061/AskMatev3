@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Question</title>
+</head>
+<body>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <form action="{{ url_for('add_question') }}" method="post">
+        <label><h2>Title</h2></label>
+        <input type="text" id="Title" name="Title"><br><br>
+        <label><h3>Description</h3></label>
+        <textarea name="Description" id="Description" rows="5" cols="60"></textarea><br>
+        <input type="submit">
+    </form>
+
+</body>
+</html>

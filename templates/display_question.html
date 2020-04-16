@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ueue</title>
+</head>
+<body>
+    {% for question in questions %}
+        <label>Title: </label>
+        {{ question['Title'] }}<br>
+        <label>Description: </label>
+        {{ question['Description'] }}<br>
+    {% endfor %}
+
+
+</body>
+</html>
