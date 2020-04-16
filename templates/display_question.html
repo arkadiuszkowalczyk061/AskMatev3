@@ -1,11 +1,9 @@
-{% extends 'layout.html' %}
-
 <title>{{ title }}</title>
 {% block content %}
     <p>{{ message }}</p>
-    <form action="{{ url_for('index') }}" method="post">
+    <form action="{{ url_for('add_answer', id=id) }}" method="post">
         <label>Add an answer</label><br>
-        <textarea name="Description" id="Description" rows="5" cols="60"></textarea><br>
+        <textarea name="Answer" id="Answer" rows="5" cols="60"></textarea><br>
         <input type="submit">
     </form>
 {% endblock content %}
