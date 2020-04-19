@@ -1,6 +1,7 @@
 ANSWERS_PATH = 'sample_data/answer.csv'
 QUESTIONS_PATH = 'sample_data/question.csv'
 import csv
+from csv import writer
 
 def import_questions():
     questions = []
@@ -18,3 +19,8 @@ def import_answers():
     for row in lines:
         answers.append(row)
     return answers
+
+def new_question(QUESTIONS_PATH, new_line):
+    with open(QUESTIONS_PATH, 'a+', newline='') as write_obj:
+        csv_writer = writer(write_obj)
+        csv_writer.writerow(new_line)
