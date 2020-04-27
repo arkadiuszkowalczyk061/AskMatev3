@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, url_for, abort, render_template
-import data_manager
+import data_manager, random
 
 # COL_TITLES = ['Title', 'Description']
 # questions = [{'Id': 0, 'Title': 'Tisstleasfd', 'Description': 'Descriafsdpafdtion'}]
@@ -30,21 +30,24 @@ def add_answer(id):
 
 
 
+@app.route('/add_question', methods=['POST', "GET"])
+def add_question():
+    global questions
+    if request.method == 'POST':
+        new_question = ['ID', 'Submission Time', 'View Number', 'Vote Number', 'Title', 'Message', 'Image']
+        new_question[0] = int(QUESTIONS[-1][0]) + 1
+        new_question[1] = 150
+        new_question[2] = 10
+        new_question[3] = 15
+        new_question[4] = request.form['Title']
+        new_question[5] = request.form['Message']
+        new_question[6] = ' '
 
-
-
-# @app.route('/add_question', methods=['POST', "GET"])
-# def add_question():
-#     global questions
-#     if request.method == 'POST':
-#         new_question = dict(request.form)
-#         new_question['Title'] = request.form['Title']
-#         new_question['Description'] = request.form['Description']
-#
-#         questions.append(new_question)
-#         return redirect(url_for('display_question'))
-#     else:
-#         return render_template('add_question.html')
+        QUESTIONS.append(new_question)
+        data_manager.new_question('sample_data/answer.csv', new_question)
+        return redirect(url_for('index'))
+    else:
+        return render_template('add_question.html')
 
 
 @app.route('/display_question/<id>', methods=['POST', "GET"])
