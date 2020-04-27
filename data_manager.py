@@ -18,3 +18,9 @@ def import_answers():
     for row in lines:
         answers.append(row)
     return answers
+
+def append_data(file_name, list_of_elements):
+    with open(file_name, 'a+') as write_obj:
+        writer=csv.writer(write_obj)
+        writer.writerow(list_of_elements)
+
