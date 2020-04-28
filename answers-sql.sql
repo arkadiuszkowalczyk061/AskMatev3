@@ -1,0 +1,1 @@
+INSERT INTO public.answers (id, submission_time, vote_number, question_id, message) VALUES (2, 1493088154, 35, 1, 'Look it up in the Python docs');
