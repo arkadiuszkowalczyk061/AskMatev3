@@ -1,20 +1,9 @@
-<<<<<<< HEAD
 # ANSWERS_PATH = 'sample_data/answer.csv'
 # QUESTIONS_PATH = 'sample_data/question.csv'
 # import csv
 # from csv import writer
 import connection
 
-@connection.connection_handler
-def import_questions(cursor, order_by, order):
-    cursor.execute(f"""
-                    SELECT * FROM question
-                    ORDER BY {order_by}{order};
-                    """)
-    questions = cursor.fetchall()
-    return questions
-
-import_questions()
 #
 # def import_answers():
 #     answers = []
@@ -34,7 +23,7 @@ import_questions()
 #     with open(QUESTIONS_PATH, 'a+', newline='') as write_obj:
 #         csv_writer = writer(write_obj)
 #         csv_writer.writerow(new_line)
-=======
+
 from datetime import datetime
 from connection import connection_handler, connection_handler_list
 
@@ -78,11 +67,14 @@ def get_all_answers(cursor):
     answers = cursor.fetchall()
     return answers
 
+
 @connection_handler
 def get_all_questions(cursor):
     cursor.execute("""SELECT * FROM questions""")
     questions = cursor.fetchall()
     return questions
+
+get_all_questions()
 
 @connection_handler
 def get_all_comments(cursor):
@@ -96,5 +88,3 @@ def get_all_question_headers(cursor):
                       WHERE TABLE_NAME = 'questions';""")
     table_headers = cursor.fetchall()
     return table_headers
-
->>>>>>> 4ccc0ce336fec198258e1d2f79605ed659c92f21
