@@ -47,3 +47,16 @@ def get_all_questions(cursor):
     questions = cursor.fetchall()
     return questions
 
+@connection_handler
+def get_all_comments(cursor):
+    cursor.execute("""SELECT * FROM comments""")
+    comments = cursor.fetchall()
+    return comments
+
+@connection_handler
+def get_all_question_headers(cursor):
+    cursor.execute("""SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
+                      WHERE TABLE_NAME = 'questions';""")
+    table_headers = cursor.fetchall()
+    return table_headers
+
