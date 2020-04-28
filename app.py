@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, url_for, abort, render_template
-import data_manager, random
+import data_manager, random, psycopg2, psycopg2.extras
 
 # COL_TITLES = ['Title', 'Description']
 # questions = [{'Id': 0, 'Title': 'Tisstleasfd', 'Description': 'Descriafsdpafdtion'}]
@@ -44,7 +44,7 @@ def add_question():
         new_question[6] = ' '
 
         QUESTIONS.append(new_question)
-        data_manager.new_question('sample_data/answer.csv', new_question)
+        data_manager.new_question('sample_data/question.csv', new_question)
         return redirect(url_for('index'))
     else:
         return render_template('add_question.html')
