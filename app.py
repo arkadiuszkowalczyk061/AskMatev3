@@ -50,9 +50,9 @@ def add_question():
 @app.route('/display_question/<id>', methods=['POST', "GET"])
 def display_question(id):
     id = int(id)
-    question_data = QUESTIONS[id - 1]
-    title = question_data[4]
-    message = question_data[5]
+    question_data = QUESTIONS[id - 2]
+    title = question_data['title']
+    message = question_data['message']
     return render_template('display_question.html', questions=QUESTIONS, title=title, message=message, id=id)
 
 
