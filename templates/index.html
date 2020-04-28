@@ -32,10 +32,10 @@ h2 {
         {% for title in titles %}
             <th>{{ title }}</th>
         {% endfor %}
-        {% for row in questions %}
+        {% for dictionary in questions %}
             <tr>
-                {% for value in row %}
-                    <td><a href="{{ url_for('display_question', id = row[0]) }}">{{ value }}</a></td>
+                {% for key, value in dictionary.items() %}
+                    <td><a href="{{ url_for('display_question', id = dictionary['id']) }}">{{ dictionary.get(key) }}</a></td>
                 {% endfor %}
             </tr>
         {% endfor %}

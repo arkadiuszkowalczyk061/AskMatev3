@@ -15,8 +15,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    global QUESTIONS
-    return render_template('index.html', questions=QUESTIONS, titles=TITLES_QUESTIONS)
+    questions = data_manager.get_all_questions()
+    return render_template('index.html', questions=questions, titles=TITLES_QUESTIONS)
 
 
 @app.route('/add_answer/<id>', methods=['POST'])
