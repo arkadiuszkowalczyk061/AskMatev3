@@ -4,19 +4,20 @@ import data_manager, random, psycopg2, psycopg2.extras
 # COL_TITLES = ['Title', 'Description']
 # questions = [{'Id': 0, 'Title': 'Tisstleasfd', 'Description': 'Descriafsdpafdtion'}]
 
-QUESTIONS = data_manager.import_questions()
-ANSWERS = data_manager.import_answers()
+QUESTIONS = data_manager.get_all_questions()
+ANSWERS = data_manager.get_all_answers()
 
 TITLES_QUESTIONS = ['ID', 'Submission Time', 'View Number', 'Vote Number', 'Title', 'Message', 'Image']
 TITLES_ANSWERS = ['ID', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
-
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def index():
+    global QUESTIONS
     return render_template('index.html', questions=QUESTIONS, titles=TITLES_QUESTIONS)
+
 
 @app.route('/add_answer/<id>', methods=['POST'])
 def add_answer(id):
@@ -28,21 +29,19 @@ def add_answer(id):
     return redirect(url_for('index'))
 
 
-
-
 @app.route('/add_question', methods=['POST', "GET"])
 def add_question():
-    global questions
+    global QUESTIONS
     if request.method == 'POST':
-        new_question = {'ID': questions[-1].get("id") + 1,
-                       'submission_time': 0,
-                        'viev_number': 0,
+        new_question = {'id': QUESTIONS[-1].get('id') + 1,
+                        'submission_time': 0,
+                        'view_number': 0,
                         'vote_number': 0,
                         'title': request.form.get("Title"),
                         'message': request.form.get("Message"),
-                        'image': None}
+                        'image': '...'}
 
-        data_manager.new_question('sample_data/question.csv', new_question)
+        data_manager.write_data_to_questions(new_question)
         return redirect(url_for('index'))
     else:
         return render_template('add_question.html')
@@ -55,7 +54,6 @@ def display_question(id):
     title = question_data[4]
     message = question_data[5]
     return render_template('display_question.html', questions=QUESTIONS, title=title, message=message, id=id)
-
 
 
 if __name__ == '__main__':

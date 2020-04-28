@@ -13,8 +13,6 @@ def get_all_questions(cursor):
     questions = cursor.fetchall()
     return questions
 
-get_all_questions()
-
 @connection_handler
 def get_all_comments(cursor):
     cursor.execute("""SELECT * FROM comments""")
@@ -42,7 +40,8 @@ def write_data_to_questions(cursor, data_to_add):
                    {'id': data_to_add['id'],
                     'submission_time': data_to_add['submission_time'],
                     'view_number': data_to_add['view_number'],
-                    'vote_number': data_to_add['title'],
+                    'vote_number': data_to_add['vote_number'],
+                    'title': data_to_add['title'],
                     'message': data_to_add['message'],
                     'image': data_to_add['image']})
 
