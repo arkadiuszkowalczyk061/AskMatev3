@@ -1,17 +1,11 @@
 from flask import Flask, request, redirect, url_for, abort, render_template
 import data_manager, random, psycopg2, psycopg2.extras
 
-# COL_TITLES = ['Title', 'Description']
-# questions = [{'Id': 0, 'Title': 'Tisstleasfd', 'Description': 'Descriafsdpafdtion'}]
-
-QUESTIONS = data_manager.get_all_questions()
-ANSWERS = data_manager.get_all_answers()
 
 TITLES_QUESTIONS = ['ID', 'Title', 'Message']
 TITLES_ANSWERS = ['ID', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def index():
@@ -41,7 +35,6 @@ def add_question():
                 'image': ""
             }
         )
-        ide = new_question_data['id']
         data_manager.write_data_to_questions(new_question_data)
         return redirect(url_for('index'))
     else:
@@ -53,7 +46,7 @@ def display_question(id):
     answers=data_manager.get_all_answers()
     questions = data_manager.get_all_questions()
     id = int(id)
-    question_data = questions[id - 1]
+    question_data = data_manager.get_question_by_id(id)
     title = question_data['title']
     message = question_data['message']
     return render_template('display_question.html', questions=questions, title=title, message=message, id=id,

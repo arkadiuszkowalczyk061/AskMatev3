@@ -100,3 +100,10 @@ def delete_question(cursor, id):
                 """,
                    {'id': id})
 
+@connection_handler
+def get_question_by_id(cursor, question_id):
+    cursor.execute("""SELECT * FROM questions
+                    WHERE id=%(id)s;""",
+                   {'id': question_id})
+    question_data = cursor.fetchall()[0]
+    return question_data

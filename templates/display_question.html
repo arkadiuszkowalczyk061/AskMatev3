@@ -4,8 +4,8 @@
 
 <title>{{ title }}</title>
 {% block content %}
-    <h2>{{ title }}</h2>
-    <p>{{ message }}</p>
+    <h2 id="display_question_title">{{ title }}</h2>
+    <p id="display_question_message">{{ message }}</p>
     <h3>Answers:</h3>
     {% for answer in answers %}
         {% for key, value in answer.items() %}
@@ -17,7 +17,7 @@
     <form action="{{ url_for('add_answer', id=id) }}" method="post">
         <label>Add an answer</label><br>
         <textarea name="Answer" id="Answer" rows="5" cols="60"></textarea><br>
-        <input type="submit">
+        <button id="button_submit2" type="submit"> Submit </button>
     </form>
-    <a href="{{ url_for('delete_question', id=id) }}"><button type="button">Delete question</button></a>
+    <a id="delete_button" type="submit" href="{{ url_for('delete_question', id=id) }}">DELETE</a>
 {% endblock content %}

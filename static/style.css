@@ -127,3 +127,51 @@ label {
     left: 48%;
     top: 350px;
 }
+
+#display_question_title {
+    color: #66fcf1;
+    font-weight: bold;
+    font-size: 64px;
+    height: 100px;
+}
+
+#display_question_message {
+    color: #c5c6c7;
+    font-weight: normal;
+    font-size: 32px;
+}
+
+#button_submit2 {
+    display: inline-block;
+    margin: 4px;
+    background-color: #66fcf1;
+    border: none;
+    border-radius: 8px;
+    padding: 20px 32px;
+    width: 170px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 32px;
+    color: #45a29e;
+    font-weight: bold;
+    position: relative;
+    left: 90%;
+}
+
+#delete_button {
+    display: inline-block;
+    margin: 4px;
+    background-color: #66fcf1;
+    border: none;
+    border-radius: 8px;
+    padding: 20px 32px;
+    width: 190px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 32px;
+    color: #45a29e;
+    font-weight: bold;
+    position: absolute;
+    right: 0px;
+    top: 0px
+}
