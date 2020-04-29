@@ -62,7 +62,7 @@ def get_next_answer_id(cursor):
     new_id = cursor.fetchall()[0]['max'] + 1
     return new_id
 
-@connection_handler
+
 def add_new_answer(new_answer, question_id):
     new_answer_data = {
         "id": get_next_answer_id(),
@@ -73,6 +73,7 @@ def add_new_answer(new_answer, question_id):
         "image": ""
         }
     write_data_to_answers(new_answer_data)
+
 
 @connection_handler
 def get_next_question_id(cursor):
