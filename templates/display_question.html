@@ -1,5 +1,6 @@
 <title>{{ title }}</title>
 {% block content %}
+    <h2>{{ title }}</h2>
     <p>{{ message }}</p>
     <form action="{{ url_for('add_answer', id=id) }}" method="post">
         <label>Add an answer</label><br>

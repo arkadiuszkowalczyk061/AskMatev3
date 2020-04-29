@@ -16,7 +16,7 @@ th {
 
 th,
 td {
-  width: 150px;
+  width: 300px;
   text-align: center;
   border: 1px solid black;
   padding: 5px;
@@ -35,7 +35,9 @@ h2 {
         {% for dictionary in questions %}
             <tr>
                 {% for key, value in dictionary.items() %}
-                    <td><a href="{{ url_for('display_question', id = dictionary['id']) }}">{{ dictionary.get(key) }}</a></td>
+                    {% if key == 'id' or key == 'title' or key == 'message'  %}
+                        <td><a href="{{ url_for('display_question', id = dictionary['id']) }}">{{ dictionary.get(key) }}</a></td>
+                    {% endif %}
                 {% endfor %}
             </tr>
         {% endfor %}

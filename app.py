@@ -7,7 +7,7 @@ import data_manager, random, psycopg2, psycopg2.extras
 QUESTIONS = data_manager.get_all_questions()
 ANSWERS = data_manager.get_all_answers()
 
-TITLES_QUESTIONS = ['ID', 'Submission Time', 'View Number', 'Vote Number', 'Title', 'Message', 'Image']
+TITLES_QUESTIONS = ['ID', 'Title', 'Message']
 TITLES_ANSWERS = ['ID', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
 app = Flask(__name__)
@@ -19,21 +19,26 @@ def index():
     return render_template('index.html', questions=questions, titles=TITLES_QUESTIONS)
 
 
-@app.route('/add_answer/<id>', methods=['POST'])
+@app.route('/add_answer/<id>', methods=['POST', 'GET'])
 def add_answer(id):
-    new_record = dict(request.form)
-    new_record_data = list(new_record.values())[0]
-    # new_record_data = next(iter(new_record.values()))
-    new_answer = ['ID', 'subtime', 'vote', new_record_data, 'message']
-    data_manager.append_data('sample_data/answer.csv', new_answer)
-    return redirect(url_for('index'))
+    global ANSWERS, QUESTIONS
+    id = int(id)
+    if request.method == 'POST':
+        new_answer = {'id': 0,
+                     'submission_time': 0,
+                     'vote_number': 0,
+                     'question_id': QUESTIONS[id],
+                     'message': request.form.get("Answer")}
+
+        data_manager.write_data_to_answers(new_answer)
+        return redirect(url_for('display_question.html'))
 
 
 @app.route('/add_question', methods=['POST', "GET"])
 def add_question():
     global QUESTIONS
     if request.method == 'POST':
-        new_question = {'id': QUESTIONS[-1].get('id') + 1,
+        new_question = {'id': QUESTIONS[-1]('id') + 1,
                         'submission_time': 0,
                         'view_number': 0,
                         'vote_number': 0,
