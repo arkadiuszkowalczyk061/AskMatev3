@@ -61,5 +61,17 @@ def display_question(id):
                            answers=answers)
 
 
+@app.route('/question/<id>/', methods=['POST', 'GET'])
+def delete_question(id):
+    id = int(id)
+    if request.method == 'POST':
+        data_manager.delete_question(id)
+
+        return redirect(url_for('index'))
+
+    else:
+        return render_template('delete_question_confirm.html', id = id)
+
+
 if __name__ == '__main__':
     app.run()

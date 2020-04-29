@@ -71,7 +71,7 @@ def add_new_answer(new_answer, question_id):
         "question_id": question_id,
         "message": new_answer,
         "image": ""
-}
+        }
     write_data_to_answers(new_answer_data)
 
 @connection_handler
@@ -89,3 +89,14 @@ def add_new_question_data():
         'vote_number': 0
         }
     return new_question_data
+
+@connection_handler
+def delete_question(cursor, id):
+    cursor.execute("""
+                DELETE FROM questions
+                WHERE id = %(id)s;
+                DELETE FROM answers
+                WHERE question_id = %(id)s;
+                """,
+                   {'id': id})
+
