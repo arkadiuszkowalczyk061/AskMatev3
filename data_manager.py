@@ -64,12 +64,27 @@ def get_next_answer_id(cursor):
 
 
 def add_new_answer(new_answer, question_id):
-    new_data = {
+    new_answer_data = {
         "id": get_next_answer_id(),
         "submission_time": datetime.now().replace(microsecond=0),
-        "vote_number": "0",
+        "vote_number": 0,
         "question_id": question_id,
         "message": new_answer,
         "image": ""
-    }
-    write_data_to_answers(new_data)
+}
+    write_data_to_answers(new_answer_data)
+
+@connection_handler
+def get_next_question_id(cursor):
+    cursor.execute("""SELECT MAX(id) from questions;""")
+    new_id = cursor.fetchall()[0]['max'] + 1
+    return new_id
+
+def add_new_question_data():
+    new_question_data = {
+        'id': get_next_question_id(),
+        'submission_time': datetime.now().replace(microsecond=0),
+        'view_number': 0,
+        'vote_number': 0
+        }
+    return new_question_data

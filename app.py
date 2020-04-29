@@ -35,15 +35,15 @@ def add_answer(id):
 def add_question():
     global QUESTIONS
     if request.method == 'POST':
-        new_question = {'id': QUESTIONS[-1]('id') + 1,
-                        'submission_time': 0,
-                        'view_number': 0,
-                        'vote_number': 0,
-                        'title': request.form.get("Title"),
-                        'message': request.form.get("Message"),
-                        'image': '...'}
-
-        data_manager.write_data_to_questions(new_question)
+        new_question_data = data_manager.add_new_question_data()
+        new_question_data.update(
+            {
+                'title': request.form.get('Title'),
+                'message': request.form.get('Message'),
+                'image': ""
+            }
+        )
+        data_manager.write_data_to_questions(new_question_data)
         return redirect(url_for('index'))
     else:
         return render_template('add_question.html')
