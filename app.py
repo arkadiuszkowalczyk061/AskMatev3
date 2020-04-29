@@ -21,7 +21,6 @@ def index():
 
 @app.route('/add_answer/<id>', methods=['POST', 'GET'])
 def add_answer(id):
-    global ANSWERS, QUESTIONS
     id = int(id)
     if request.method == 'POST':
         new_answer = request.form.get("Answer")
@@ -33,7 +32,6 @@ def add_answer(id):
 
 @app.route('/add_question', methods=['POST', "GET"])
 def add_question():
-    global QUESTIONS
     if request.method == 'POST':
         new_question_data = data_manager.add_new_question_data()
         new_question_data.update(
@@ -43,6 +41,7 @@ def add_question():
                 'image': ""
             }
         )
+        ide = new_question_data['id']
         data_manager.write_data_to_questions(new_question_data)
         return redirect(url_for('index'))
     else:
@@ -54,7 +53,7 @@ def display_question(id):
     answers=data_manager.get_all_answers()
     questions = data_manager.get_all_questions()
     id = int(id)
-    question_data = QUESTIONS[id - 1]
+    question_data = questions[id - 1]
     title = question_data['title']
     message = question_data['message']
     return render_template('display_question.html', questions=questions, title=title, message=message, id=id,

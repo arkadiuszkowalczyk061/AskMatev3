@@ -52,3 +52,78 @@ a:hover {
     width: 100%;
     height: 280px;
 }
+textarea {
+    width: 99%;
+    height: 200px;
+    padding: 12px 20px;
+    margin: 2px;
+    box-sizing: border-box;
+    background-color: #1f2833;
+    resize: none;
+    border: none;
+    font-size: 16px;
+    color: #c5c6c7;
+        }
+#Title {
+    width: 20%;
+    height: 50px;
+    padding: 12px;
+    margin: 2px;
+    box-sizing: border-box;
+    border: none;
+    resize: none;
+    background-color: #1f2833;
+    font-size: 16px;
+    color: #c5c6c7;
+    position: relative;
+    left: 40%;
+    font-weight: bold;
+}
+label {
+    color: #66fcf1;
+}
+#Title_label {
+    color: #66fcf1;
+    position: relative;
+    left: 47.5%;
+    font-size: 22px;
+}
+#description {
+    color: #66fcf1;
+    position: relative;
+    left: 44%;
+    font-size: 22px;
+}
+#button_submit {
+    display: inline-block;
+    margin: 4px;
+    background-color: #66fcf1;
+    border: none;
+    border-radius: 8px;
+    padding: 12px ;
+    text-align: center;
+    text-decoration: none;
+    font-size: 24px;
+    color: #45a29e;
+    font-weight: bold;
+    position: relative;
+    left: 48%;
+    top: 50px;
+}
+.button2 {
+    display: inline-block;
+    margin: 4px;
+    background-color: #66fcf1;
+    border: none;
+    border-radius: 8px;
+    padding: 20px 32px;
+    width: 120px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 32px;
+    color: #45a29e;
+    font-weight: bold;
+    position: relative;
+    left: 48%;
+    top: 350px;
+}
