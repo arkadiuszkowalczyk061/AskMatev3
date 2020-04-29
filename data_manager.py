@@ -1,4 +1,5 @@
 from connection import connection_handler, connection_handler_list
+from datetime import datetime
 
 @connection_handler
 def get_all_answers(cursor):
@@ -54,3 +55,21 @@ def write_data_to_answers(cursor, data_to_add):
                  'vote_number': data_to_add['vote_number'],
                  'question_id': data_to_add['question_id'],
                  'message': data_to_add['message']})
+
+@connection_handler
+def get_next_answer_id(cursor):
+    cursor.execute("""SELECT MAX(id) from answers;""")
+    new_id = cursor.fetchall()[0]['max'] + 1
+    return new_id
+
+
+def add_new_answer(new_answer, question_id):
+    new_data = {
+        "id": get_next_answer_id(),
+        "submission_time": datetime.now().replace(microsecond=0),
+        "vote_number": "0",
+        "question_id": question_id,
+        "message": new_answer,
+        "image": ""
+    }
+    write_data_to_answers(new_data)

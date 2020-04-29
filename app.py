@@ -24,14 +24,11 @@ def add_answer(id):
     global ANSWERS, QUESTIONS
     id = int(id)
     if request.method == 'POST':
-        new_answer = {'id': 0,
-                     'submission_time': 0,
-                     'vote_number': 0,
-                     'question_id': QUESTIONS[id],
-                     'message': request.form.get("Answer")}
+        new_answer = request.form.get("Answer")
 
-        data_manager.write_data_to_answers(new_answer)
-        return redirect(url_for('display_question.html'))
+        data_manager.add_new_answer(new_answer, id)
+
+        return redirect(url_for('display_question', id=id))
 
 
 @app.route('/add_question', methods=['POST', "GET"])
