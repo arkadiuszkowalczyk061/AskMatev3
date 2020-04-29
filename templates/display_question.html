@@ -2,6 +2,14 @@
 {% block content %}
     <h2>{{ title }}</h2>
     <p>{{ message }}</p>
+    <h3>Answers:</h3>
+    {% for answer in answers %}
+        {% for key, value in answer.items() %}
+            {% if key == 'message' and answer.get('question_id') == id%}
+                <p>{{ answer.get(key) }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
     <form action="{{ url_for('add_answer', id=id) }}" method="post">
         <label>Add an answer</label><br>
         <textarea name="Answer" id="Answer" rows="5" cols="60"></textarea><br>

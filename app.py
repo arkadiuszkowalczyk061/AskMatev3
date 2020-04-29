@@ -51,11 +51,14 @@ def add_question():
 
 @app.route('/display_question/<id>', methods=['POST', "GET"])
 def display_question(id):
+    answers=data_manager.get_all_answers()
+    questions = data_manager.get_all_questions()
     id = int(id)
-    question_data = QUESTIONS[id - 2]
+    question_data = QUESTIONS[id - 1]
     title = question_data['title']
     message = question_data['message']
-    return render_template('display_question.html', questions=QUESTIONS, title=title, message=message, id=id)
+    return render_template('display_question.html', questions=questions, title=title, message=message, id=id,
+                           answers=answers)
 
 
 if __name__ == '__main__':
