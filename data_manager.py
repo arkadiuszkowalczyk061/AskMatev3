@@ -80,6 +80,7 @@ def get_next_question_id(cursor):
     new_id = cursor.fetchall()[0]['max'] + 1
     return new_id
 
+
 def add_new_question_data():
     new_question_data = {
         'id': get_next_question_id(),
