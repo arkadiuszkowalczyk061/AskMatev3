@@ -15,4 +15,5 @@
         <textarea name="Answer" id="Answer" rows="5" cols="60"></textarea><br>
         <input type="submit">
     </form>
+    <a href="{{ url_for('delete_question', id=id) }}"><button type="button">Delete question</button></a>
 {% endblock content %}
