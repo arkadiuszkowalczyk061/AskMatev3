@@ -73,10 +73,29 @@ def edit_question(id):
     if request.method == 'POST':
         updated_title = request.form.get('updated_title')
         updated_message = request.form.get('updated_message')
-        print(updated_title, updated_message)
         data_manager.update_question_by_id(updated_message, updated_title, id)
 
         return redirect(url_for('display_question', id=id))
+
+@app.route('/display_question/<id>/<answer_id>/edit', methods=['POST', 'GET'])
+def edit_answer(id, answer_id):
+
+    if request.method == 'POST':
+        updated_answer = request.form.get('updated_answer')
+        data_manager.update_answer_by_id(updated_answer, id)
+
+        return redirect(url_for('display_question', id=id))
+
+
+
+    if request.method == 'GET':
+        id = int(id)
+        message = data_manager.get_answer_by_id(answer_id)
+
+        return render_template('edit_question_answer.html', id=id, answer_id=answer_id, message=message)
+
+
+
 
 @app.route('/question/<id>/', methods=['POST', 'GET'])
 def delete_question(id):
@@ -89,7 +108,6 @@ def delete_question(id):
 
     else:
         return render_template('delete_question_confirm.html', id=id)
-
 
 @app.route("/display_question/<id>/<answer_id>/delete", methods=['POST'])
 def delete_answer(id, answer_id):

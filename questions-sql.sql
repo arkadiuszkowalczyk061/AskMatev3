@@ -1,4 +1,6 @@
-DROP TABLE IF EXISTS public.questions;
+DROP TABLE IF EXISTS public.questions;            WHERE upper(title) LIKE %(data_search)s OR upper(message) LIKE %(data_search)s OR lower(title) LIKE %(data_search)s OR lower(message) LIKE %(data_search)s
+    cursor.execute(query, {'data_search': "%" + data_search + "%"})
+    return cursor.fetchall()
 CREATE TABLE public.questions (id INTEGER PRIMARY KEY , submission_time timestamp, view_number INTEGER, vote_number INTEGER, title TEXT, message TEXT, image TEXT);
 INSERT INTO public.questions (id, submission_time, view_number, vote_number, title, message, image) VALUES (1,'2020-04-29 12:02:33', 29 , 7 ,'How to make lists in Python?','I am totally new to this, any hints?', null);
 INSERT INTO public.questions (id, submission_time, view_number, vote_number, title, message, image) VALUES (2, '2020-04-29 12:02:51', 15, 9, 'Wordpress loading multiple jQuery Versions', 'I developed a plugin that uses the jquery booklet plugin (http://builtbywill.com/booklet/#/) this plugin binds a function to $ so I cann call $(''.myBook'').booklet();

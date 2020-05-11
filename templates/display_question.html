@@ -22,7 +22,10 @@
                 <label for="delete_answer"> {{ answer.get(key) }}
                 <form id="delete_answer" action="{{ url_for('delete_answer', answer_id=answer.id, id=id) }}" method="post">
                     <input type="image" id="delete_answer" name="delete_answer" src="https://cdn.pixabay.com/photo/2012/04/12/20/12/x-30465_960_720.png" border="0" height="1.5%" alt="Submit" />
-                </form><br>
+                </form>
+                <form id="edit_answer" action="{{ url_for('edit_answer', id=id, answer_id=answer.id) }}" method="get">
+                    <input type="image" id="edit_answer" name="edit_answer" src="https://pngimage.net/wp-content/uploads/2018/05/edit-button-icon-png-5.png" border="0" height="1.5%" alt="Submit">
+                </form> <br>
                 </label>
             {% endif %}
         {% endfor %}

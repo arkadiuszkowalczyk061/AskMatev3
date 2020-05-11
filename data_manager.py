@@ -137,6 +137,23 @@ def update_question_by_id(cursor, message, title, question_id):
                    {'message': message, 'id': question_id})
 
 
+def get_answer_by_id(cursor, answer_id):
+    cursor.execute("""
+                    SELECT message
+                    from answers
+                    WHERE id=%(answer_id)s""",
+                   {'answer_id': answer_id})
+    message = cursor.fetchall()[0]['message']
+    return message
+
+@connection_handler
+def update_question_by_id(cursor, message, title,  question_id):
+    cursor.execute("""
+                    UPDATE questions
+                    SET message = %(message)s, title = %(title)s
+                    WHERE id=%(id)s""", {'message': message, 'title': title, 'id': question_id})
+
+
 @connection_handler
 def get_all_questions_by_search(cursor, data_search):
     query = """
@@ -181,3 +198,10 @@ def write_new_user_password(cursor, password):
     cursor.execute(query, {'id': get_next_user_password_id(), 'password': password})
 
 
+@connection_handler
+def update_answer_by_id(cursor, message, answer_id):
+    cursor.execute("""
+                    UPDATE answers
+                    SET message = %(message)s
+                    WHERE id=%(id)s""",
+                    {'message': message, 'id': answer_id})

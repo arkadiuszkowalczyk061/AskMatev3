@@ -183,3 +183,7 @@ label {
 #edit_question {
     display: inline-block;
 }
+
+#edit_answer {
+    display: inline-block;
+}
