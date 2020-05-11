@@ -9,6 +9,7 @@
 
     <h2 id="display_question_title">{{ title }}</h2>
     <p id="display_question_message">{{ message }}</p>
+    <a href="{{ url_for('edit_question', id = id) }}">Edit Question</a>
     <h3>Answers:</h3>
 
     {% for answer in answers %}

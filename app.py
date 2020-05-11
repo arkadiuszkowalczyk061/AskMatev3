@@ -54,6 +54,24 @@ def display_question(id):
     return render_template('display_question.html', questions=questions, title=title, message=message, id=id,
                            answers=answers)
 
+@app.route('/display_question/<id>/edit', methods=['GET', 'POST'])
+def edit_question(id):
+
+    if request.method == 'GET':
+        id = int(id)
+        question_data = data_manager.get_question_by_id(id)
+        title = question_data['title']
+        message = question_data['message']
+
+        return render_template('edit_question_answer.html', title=title, message=message, id=id)
+
+    if request.method == 'POST':
+        updated_title = request.form.get('updated_title')
+        updated_message = request.form.get('updated_message')
+        print(updated_title, updated_message)
+        data_manager.update_question_by_id(updated_message, updated_title, id)
+
+        return redirect(url_for('display_question', id=id))
 
 @app.route('/question/<id>/', methods=['POST', 'GET'])
 def delete_question(id):
@@ -78,7 +96,7 @@ def delete_answer(id, answer_id):
 
     else:
         return redirect('display_question.html')
-
+#
 
 
 if __name__ == '__main__':

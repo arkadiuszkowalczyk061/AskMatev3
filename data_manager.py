@@ -129,9 +129,9 @@ def get_question_by_id(cursor, question_id):
     return question_data
 
 @connection_handler
-def update_question_by_id(cursor, message, question_id):
+def update_question_by_id(cursor, message, title,  question_id):
     cursor.execute("""
                     UPDATE questions
-                    SET message = %(message)s
+                    SET message = %(message)s, title = %(title)s
                     WHERE id=%(id)s""",
-                   {'message': message, 'id': question_id})
+                   {'message': message, 'title': title, 'id': question_id})
