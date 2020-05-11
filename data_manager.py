@@ -119,7 +119,6 @@ def delete_answer(cursor, answer_id):
                    {'answer_id': answer_id})
 
 
-
 @connection_handler
 def get_question_by_id(cursor, question_id):
     cursor.execute("""SELECT * FROM questions
@@ -128,13 +127,13 @@ def get_question_by_id(cursor, question_id):
     question_data = cursor.fetchall()[0]
     return question_data
 
+
 @connection_handler
-def update_question_by_id(cursor, message, title,  question_id):
+def update_question_by_id(cursor, message, title, question_id):
     cursor.execute("""
                     UPDATE questions
                     SET message = %(message)s, title = %(title)s
                     WHERE id=%(id)s""",
-<<<<<<< HEAD
                    {'message': message, 'id': question_id})
 
 
@@ -143,10 +142,42 @@ def get_all_questions_by_search(cursor, data_search):
     query = """
             SELECT *
             FROM questions
-            WHERE upper(title) LIKE %(data_search)s OR upper(message) LIKE %(data_search)s OR lower(title) LIKE %(data_search)s OR lower(message) LIKE %(data_search)s """
+            WHERE upper(title) LIKE %(data_search)s OR upper(message) 
+            LIKE %(data_search)s OR lower(title) LIKE %(data_search)s OR lower(message) LIKE %(data_search)s """
 
     cursor.execute(query, {'data_search': "%" + data_search + "%"})
     return cursor.fetchall()
-=======
-                   {'message': message, 'title': title, 'id': question_id})
->>>>>>> bcaadd446dfb013ff9b0a9b43d937c1b3b7cb637
+
+
+@connection_handler
+def get_next_user_login_id(cursor):
+    cursor.execute("""SELECT MAX(id) from user_login;""")
+    new_id = cursor.fetchall()[0]['max'] + 1
+    return new_id
+
+
+@connection_handler
+def get_next_user_password_id(cursor):
+    cursor.execute("""SELECT MAX(id) from user_password;""")
+    new_id = cursor.fetchall()[0]['max'] + 1
+    return new_id
+
+
+
+@connection_handler
+def write_new_user_login(cursor, login):
+    query = ("""
+        INSERT INTO user_login 
+        VALUES (%(id)s, %(login)s);""")
+
+    cursor.execute(query, {'id': get_next_user_login_id(), 'login': login})
+
+@connection_handler
+def write_new_user_password(cursor, password):
+    query = ("""
+        INSERT INTO user_password
+        VALUES (%(id)s, %(password)s);""")
+
+    cursor.execute(query, {'id': get_next_user_password_id(), 'password': password})
+
+

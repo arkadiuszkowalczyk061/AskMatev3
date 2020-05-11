@@ -103,6 +103,17 @@ def delete_answer(id, answer_id):
         return redirect('display_question.html')
 
 
+@app.route('/register', methods=['POST', 'GET'])
+def create_user():
+    login = request.form.get('login')
+    password = request.form.get('password')
+    if request.method == 'POST':
+        data_manager.write_new_user_login(login)
+        data_manager.write_new_user_password(password)
+        return redirect(url_for('index'))
+
+    else:
+        return render_template('registration.html')
 
 
 
