@@ -179,3 +179,7 @@ label {
 #delete_answer {
     display: inline-block;
 }
+
+#edit_question {
+    display: inline-block;
+}
