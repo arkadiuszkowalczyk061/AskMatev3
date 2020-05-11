@@ -14,9 +14,10 @@
             <button type="submit">Submit</button>
         </form>
     {% else %}
-        <form action="{{ url_for('edit_answer', id=id, answer_id=answer_id) }}" method="get">
+        <form action="{{ url_for('edit_answer', id=id, answer_id=answer_id) }}" method="post">
             <label for="updated_answer">Message</label>
             <textarea name="updated_answer">{{ message }}</textarea>
+            <button type="submit">Submit</button>
         </form>
     {% endif %}
 </body>

@@ -130,8 +130,13 @@ def get_question_by_id(cursor, question_id):
 
 @connection_handler
 def get_answer_by_id(cursor, answer_id):
-    pass
-
+    cursor.execute("""
+                    SELECT message
+                    from answers
+                    WHERE id=%(answer_id)s""",
+                   {'answer_id': answer_id})
+    message = cursor.fetchall()[0]['message']
+    return message
 
 @connection_handler
 def update_question_by_id(cursor, message, title,  question_id):
