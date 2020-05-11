@@ -135,3 +135,14 @@ def update_question_by_id(cursor, message, question_id):
                     SET message = %(message)s
                     WHERE id=%(id)s""",
                    {'message': message, 'id': question_id})
+
+
+@connection_handler
+def get_all_questions_by_search(cursor, data_search):
+    query = """
+            SELECT *
+            FROM questions
+            WHERE upper(title) LIKE %(data_search)s OR upper(message) LIKE %(data_search)s OR lower(title) LIKE %(data_search)s OR lower(message) LIKE %(data_search)s """
+
+    cursor.execute(query, {'data_search': "%" + data_search + "%"})
+    return cursor.fetchall()

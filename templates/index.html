@@ -7,22 +7,32 @@
 </head>
 <body>
     <img class="orangutan" src="/static/XD.jpg">
-    <table>
-        {% for title in titles %}
-            <th>{{ title }}</th>
-        {% endfor %}
-        {% for dictionary in questions %}
-            <tr>
-                {% for key, value in dictionary.items() %}
-                    {% if key == 'id' or key == 'message'  %}
-                        <td>{{ dictionary.get(key) }}</td>
-                    {% elif key =='title' %}
-                        <td><a href="{{ url_for('display_question', id = dictionary['id']) }}">{{ dictionary.get(key) }}</a></td>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+        <div>
+        <form action="{{ url_for('index') }}">
+            <label for="search_bar">Search: </label>
+            <input type="text" id="search_bar" name="search">
+            <button type="submit">submit</button>
+        </form>
+    </div>
+    <div>
+        <table>
+            {% for title in titles %}
+                <th>{{ title }}</th>
+            {% endfor %}
+            {% for dictionary in questions %}
+                <tr>
+                    {% for key, value in dictionary.items() %}
+                        {% if key == 'id' or key == 'message'  %}
+                            <td>{{ dictionary.get(key) }}</td>
+                        {% elif key =='title' %}
+                            <td><a href="{{ url_for('display_question', id = dictionary['id']) }}">{{ dictionary.get(key) }}</a></td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
     <a class="button" href="{{ url_for('add_question') }}">ADD QUESTION</a>
+
 </body>
 </html>

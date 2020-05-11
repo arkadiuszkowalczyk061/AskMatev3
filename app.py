@@ -9,7 +9,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    questions = data_manager.get_all_questions()
+    data_search = request.args.get('search')
+    if data_search:
+        questions = data_manager.get_all_questions_by_search(data_search)
+    else:
+        questions = data_manager.get_all_questions()
+
     return render_template('index.html', questions=questions, titles=TITLES_QUESTIONS)
 
 
@@ -68,7 +73,7 @@ def delete_question(id):
         return render_template('delete_question_confirm.html', id=id)
 
 
-@app.route("/display_question/<id>/<answer_id>", methods=['POST'])
+@app.route("/display_question/<id>/<answer_id>/delete", methods=['POST'])
 def delete_answer(id, answer_id):
     int(id)
 
@@ -78,6 +83,8 @@ def delete_answer(id, answer_id):
 
     else:
         return redirect('display_question.html')
+
+
 
 
 
