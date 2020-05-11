@@ -129,13 +129,16 @@ def get_question_by_id(cursor, question_id):
     return question_data
 
 @connection_handler
+def get_answer_by_id(cursor, answer_id):
+    pass
+
+
+@connection_handler
 def update_question_by_id(cursor, message, title,  question_id):
     cursor.execute("""
                     UPDATE questions
                     SET message = %(message)s, title = %(title)s
-                    WHERE id=%(id)s""",
-<<<<<<< HEAD
-                   {'message': message, 'id': question_id})
+                    WHERE id=%(id)s""", {'message': message, 'title': title, 'id': question_id})
 
 
 @connection_handler
@@ -144,9 +147,13 @@ def get_all_questions_by_search(cursor, data_search):
             SELECT *
             FROM questions
             WHERE upper(title) LIKE %(data_search)s OR upper(message) LIKE %(data_search)s OR lower(title) LIKE %(data_search)s OR lower(message) LIKE %(data_search)s """
-
     cursor.execute(query, {'data_search': "%" + data_search + "%"})
     return cursor.fetchall()
-=======
-                   {'message': message, 'title': title, 'id': question_id})
->>>>>>> bcaadd446dfb013ff9b0a9b43d937c1b3b7cb637
+
+@connection_handler
+def update_answer_by_id(cursor, message, answer_id):
+    cursor.execute("""
+                    UPDATE answers
+                    SET message = %(message)s
+                    WHERE id=%(id)s""",
+                    {'message': message, 'id': answer_id})

@@ -78,6 +78,17 @@ def edit_question(id):
 
         return redirect(url_for('display_question', id=id))
 
+@app.route('/display_question/<id>/<answer_id>/edit')
+def edit_answer(id, answer_id):
+
+    if request.method == 'POST':
+        pass
+    if request.method == 'GET':
+        id = int(id)
+
+
+
+
 @app.route('/question/<id>/', methods=['POST', 'GET'])
 def delete_question(id):
     id = int(id)
@@ -89,7 +100,6 @@ def delete_question(id):
 
     else:
         return render_template('delete_question_confirm.html', id=id)
-
 
 @app.route("/display_question/<id>/<answer_id>/delete", methods=['POST'])
 def delete_answer(id, answer_id):
