@@ -14,13 +14,11 @@
     {% for answer in answers %}
         {% for key, value in answer.items() %}
             {% if key == 'message' and answer.get('question_id') == id%}
-                <p>{{ answer.get(key) }}
-                <form action="{{ url_for('delete_answer', answer_id=answer.id, id=id) }}" method="post">
+                <label for="delete_answer"> {{ answer.get(key) }}
+                <form id="delete_answer" action="{{ url_for('delete_answer', answer_id=answer.id, id=id) }}" method="post">
                     <input type="image" id="delete_answer" name="delete_answer" src="https://cdn.pixabay.com/photo/2012/04/12/20/12/x-30465_960_720.png" border="0" height="1.5%" alt="Submit" />
-
-                </form>
-
-                </p>
+                </form><br>
+                </label>
             {% endif %}
         {% endfor %}
 

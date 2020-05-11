@@ -175,3 +175,7 @@ label {
     right: 0px;
     top: 0px
 }
+
+#delete_answer {
+    display: inline-block;
+}
