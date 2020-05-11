@@ -49,6 +49,8 @@ def display_question(id):
     question_data = data_manager.get_question_by_id(id)
     title = question_data['title']
     message = question_data['message']
+
+
     return render_template('display_question.html', questions=questions, title=title, message=message, id=id,
                            answers=answers)
 
@@ -56,13 +58,27 @@ def display_question(id):
 @app.route('/question/<id>/', methods=['POST', 'GET'])
 def delete_question(id):
     id = int(id)
+
     if request.method == 'POST':
         data_manager.delete_question(id)
 
         return redirect(url_for('index'))
 
     else:
-        return render_template('delete_question_confirm.html', id = id)
+        return render_template('delete_question_confirm.html', id=id)
+
+
+@app.route("/display_question/<id>/<answer_id>", methods=['POST'])
+def delete_answer(id, answer_id):
+    int(id)
+
+    if request.method == 'POST':
+        data_manager.delete_answer(answer_id)
+        return redirect(url_for('display_question', id=id))
+
+    else:
+        return redirect('display_question.html')
+
 
 
 if __name__ == '__main__':
