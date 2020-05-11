@@ -8,7 +8,12 @@
 {% block content %}
 
     <h2 id="display_question_title">{{ title }}</h2>
-    <p id="display_question_message">{{ message }}</p>
+    <label for="display_question_message">{{ message }}
+{#    <a href="{{ url_for('edit_question', id = id) }}">Edit Question</a>#}
+    <form id="edit_question" action="{{ url_for('edit_question', id=id) }}" method="get">
+        <input type="image" id="edit_question" name="edit_question" src="https://pngimage.net/wp-content/uploads/2018/05/edit-button-icon-png-5.png" border="0" height="1.5%" alt="Submit">
+    </form>
+    </label>
     <h3>Answers:</h3>
 
     {% for answer in answers %}

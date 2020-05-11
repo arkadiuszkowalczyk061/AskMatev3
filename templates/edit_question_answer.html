@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Edit </title>
+</head>
+<body>
+    <form action="{{ url_for('edit_question', id=id) }}" method="post">
+        <label for="updated_title">Title</label>
+        <input type="text" id="updated_title" name="updated_title" value="{{ title }}">
+        <label for="updated_message">Message</label>
+        <textarea name="updated_message">{{ message }}</textarea>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
