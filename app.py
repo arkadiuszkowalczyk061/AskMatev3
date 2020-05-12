@@ -1,11 +1,19 @@
 from flask import Flask, request, redirect, url_for, abort, render_template
 import data_manager, random, psycopg2, psycopg2.extras
+import bcrypt
+import os
+
+
+app.secret_key = (os.urandom(16))
+app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 TITLES_QUESTIONS = ['ID', 'Title', 'Message']
 TITLES_ANSWERS = ['ID', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
 app = Flask(__name__)
+
+
 
 @app.route('/')
 def index():
@@ -135,5 +143,9 @@ def create_user():
 
 
 
+
+
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug= True)

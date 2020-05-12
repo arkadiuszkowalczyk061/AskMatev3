@@ -189,6 +189,7 @@ def write_new_user_login(cursor, login):
 
     cursor.execute(query, {'id': get_next_user_login_id(), 'login': login})
 
+
 @connection_handler
 def write_new_user_password(cursor, password):
     query = ("""
@@ -205,3 +206,16 @@ def update_answer_by_id(cursor, message, answer_id):
                     SET message = %(message)s
                     WHERE id=%(id)s""",
                     {'message': message, 'id': answer_id})
+
+
+
+@connection_handler
+def add_user_ta_database(cursor, login, password, time):
+    cursor.execute("""INSERT INTO user_login (login, password, time) VALUES (%s, %s, %s)""", (login, password, time))
+
+
+
+
+
+
+
