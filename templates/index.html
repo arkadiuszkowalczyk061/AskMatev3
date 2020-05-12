@@ -19,11 +19,11 @@
             {% for key, value in titles.items() %}
                 <th>{{ value }}<br> <form action="{{ url_for('sort_questions') }}" method="post">
                     <input type="hidden" name="order_by" value="{{ key }}">
-                    <select id="order" name="order">
+                    <select onchange="this.form.submit()" id="order" name="order">
                         <option value="ASC">ASCENDING</option>
                         <option value="DESC">DESCENDING</option>
                     </select>
-                    <button type="submit">SUBMIT</button>
+
                 </form>
                 </th>
             {% endfor %}
