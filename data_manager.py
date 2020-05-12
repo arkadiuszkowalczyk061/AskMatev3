@@ -141,7 +141,7 @@ def get_answer_by_id(cursor, answer_id):
     return message
 
 @connection_handler
-def update_question_by_id(cursor, message, title,  question_id):
+def update_question_by_id(cursor, message, title, question_id):
     cursor.execute("""
                     UPDATE questions
                     SET message = %(message)s, title = %(title)s
@@ -198,7 +198,17 @@ def update_answer_by_id(cursor, message, answer_id):
                     UPDATE answers
                     SET message = %(message)s
                     WHERE id=%(id)s""",
-                    {'message': message, 'id': answer_id})
+                   {'message': message, 'id': answer_id})
+
+
+@connection_handler
+def write_new_comment(cursor, message, question_id, answer_id):
+    query = ("""
+            INSERT INTO comments (message, question_id, answer_id)
+            VALUES (%(message)s, %(question_id)s, %(answer_id)s)""")
+
+    cursor.execute(query, {'message': message, 'question_id': question_id, 'answer_id': answer_id})
+
 
 @connection_handler
 def get_last_5_questions(cursor):
