@@ -42,13 +42,13 @@ def get_all_answer_headers(cursor):
 @connection_handler
 def write_data_to_questions(cursor, data_to_add):
     cursor.execute(
-        """INSERT INTO questions VALUES (%(id)s, %(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s);""",
+        """INSERT INTO questions VALUES (%(id)s, %(title)s, %(message)s, %(submission_time)s, %(view_number)s, %(vote_number)s, %(image)s);""",
         {'id': data_to_add['id'],
+         'title': data_to_add['title'],
+         'message': data_to_add['message'],
          'submission_time': data_to_add['submission_time'],
          'view_number': data_to_add['view_number'],
          'vote_number': data_to_add['vote_number'],
-         'title': data_to_add['title'],
-         'message': data_to_add['message'],
          'image': data_to_add['image']})
 
 
@@ -136,7 +136,7 @@ def update_question_by_id(cursor, message, title, question_id):
                     WHERE id=%(id)s""",
                    {'message': message, 'id': question_id})
 
-
+@connection_handler
 def get_answer_by_id(cursor, answer_id):
     cursor.execute("""
                     SELECT message
@@ -205,3 +205,19 @@ def update_answer_by_id(cursor, message, answer_id):
                     SET message = %(message)s
                     WHERE id=%(id)s""",
                     {'message': message, 'id': answer_id})
+
+@connection_handler
+def get_last_5_questions(cursor):
+    cursor.execute("""
+                    SELECT id, title, message
+                    FROM questions
+                    ORDER BY submission_time desc  LIMIT 5""")
+    return cursor.fetchall()
+
+@connection_handler
+def sort_last_questions(cursor, sorting_factor, order_direction='ASC'):
+    cursor.execute(f"""
+                    SELECT *
+                    from questions
+                    ORDER BY {sorting_factor} {order_direction} """)
+    return cursor.fetchall()

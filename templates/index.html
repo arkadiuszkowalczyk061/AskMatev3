@@ -16,13 +16,21 @@
     </div>
     <div>
         <table>
-            {% for title in titles %}
-                <th>{{ title }}</th>
+            {% for key, value in titles.items() %}
+                <th>{{ value }}<br> <form action="{{ url_for('sort_questions') }}" method="post">
+                    <input type="hidden" name="order_by" value="{{ key }}">
+                    <select id="order" name="order">
+                        <option value="ASC">ASCENDING</option>
+                        <option value="DESC">DESCENDING</option>
+                    </select>
+                    <button type="submit">SUBMIT</button>
+                </form>
+                </th>
             {% endfor %}
             {% for dictionary in questions %}
                 <tr>
                     {% for key, value in dictionary.items() %}
-                        {% if key == 'id' or key == 'message'  %}
+                        {% if key != 'id' and key !='title' and key !='image' %}
                             <td>{{ dictionary.get(key) }}</td>
                         {% elif key =='title' %}
                             <td><a href="{{ url_for('display_question', id = dictionary['id']) }}">{{ dictionary.get(key) }}</a></td>
@@ -34,6 +42,7 @@
     </div>
     <a href="{{ url_for('create_user') }}">Register</a>
     <a class="button" href="{{ url_for('add_question') }}">ADD QUESTION</a>
-
+    <a href="{{ url_for('list_questions') }}">See all questions</a>
+    <a href="{{ url_for('index') }}">HOME</a>
 </body>
 </html>
