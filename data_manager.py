@@ -139,7 +139,6 @@ def update_question_by_id(cursor, message, title, question_id):
                     WHERE id=%(id)s""",
                    {'message': message, 'id': question_id})
 
-
 @connection_handler
 def get_answer_by_id(cursor, answer_id):
     cursor.execute("""
@@ -149,7 +148,6 @@ def get_answer_by_id(cursor, answer_id):
                    {'answer_id': answer_id})
     message = cursor.fetchall()[0]['message']
     return message
-
 
 @connection_handler
 def update_question_by_id(cursor, message, title, question_id):
@@ -185,6 +183,7 @@ def get_next_user_password_id(cursor):
     return new_id
 
 
+
 @connection_handler
 def write_new_user_login(cursor, login):
     query = ("""
@@ -192,7 +191,6 @@ def write_new_user_login(cursor, login):
         VALUES (%(id)s, %(login)s);""")
 
     cursor.execute(query, {'id': get_next_user_login_id(), 'login': login})
-
 
 @connection_handler
 def write_new_user_password(cursor, password):
@@ -236,4 +234,15 @@ def sort_last_questions(cursor, sorting_factor, order_direction='ASC'):
                     from questions
                     ORDER BY {sorting_factor} {order_direction} """)
     return cursor.fetchall()
+
+
+@connection_handler
+def add_user_ta_database(cursor, login, password):
+    cursor.execute("""INSERT INTO user_login (login, password) VALUES (%s, %s)""", (login, password))
+
+
+
+
+
+
 
