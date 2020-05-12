@@ -173,12 +173,27 @@ def create_user():
     password = request.form.get('password')
     if request.method == 'POST':
         hash_pass = hash_password(password)
-        print(hash_pass)
+        print('password')
         data_manager.add_user_ta_database(login, hash_pass)
         return redirect(url_for('index'))
 
     else:
         return render_template('registration.html')
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    auxiliary = 'yes'
+    if request.method == 'POST':
+        user = request.form.get('login')
+        haslo = request.form.get('password')
+        check = data_manager.search_user(user)
+        result = [dict(row) for row in check]
+        to_check = (result[0]['password'])
+        if verify_password(haslo, to_check):
+            print('mamy')
+
+        return redirect(url_for('index'))
+    return render_template('registration.html', login=auxiliary)
 
 
 

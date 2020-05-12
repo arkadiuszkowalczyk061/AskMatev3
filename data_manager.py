@@ -242,7 +242,11 @@ def add_user_ta_database(cursor, login, password):
 
 
 
-
+@connection_handler
+def search_user(cursor, login):
+    cursor.execute("""SELECT * FROM user_login WHERE login = (%s)""", (login, ))
+    data = cursor.fetchall()
+    return data
 
 
 
