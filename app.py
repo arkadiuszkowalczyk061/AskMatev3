@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, url_for, abort, render_template
 import data_manager, random, psycopg2, psycopg2.extras
 
 
-TITLES_QUESTIONS = ['ID', 'Title', 'Message']
+TITLES_QUESTIONS = {'title': 'Title', 'message': 'Message', 'submission_time': 'Submission Time', 'view_number': '# of views', 'vote_number':'Votes'}
 TITLES_ANSWERS = ['ID', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
 app = Flask(__name__)
@@ -13,7 +13,22 @@ def index():
     if data_search:
         questions = data_manager.get_all_questions_by_search(data_search)
     else:
-        questions = data_manager.get_all_questions()
+        questions = data_manager.get_last_5_questions()
+
+    return render_template('index.html', questions=questions, titles=TITLES_QUESTIONS)
+
+@app.route('/', methods=['POST'])
+def sort_questions():
+    order_by = request.form.get('order_by')
+    order = request.form.get('order')
+    questions = data_manager.sort_last_questions(order_by, order)
+
+    return render_template('index.html', questions=questions, titles=TITLES_QUESTIONS)
+
+
+@app.route('/list')
+def list_questions():
+    questions = data_manager.get_all_questions()
 
     return render_template('index.html', questions=questions, titles=TITLES_QUESTIONS)
 
