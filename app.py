@@ -46,10 +46,22 @@ def add_question():
         return render_template('add_question.html')
 
 
+@app.route('/add_comment/<question_id>/<answer_id>', methods=['POST', 'GET'])
+def add_comment(question_id, answer_id):
+    question_id = int(question_id)
+    answer_id = int(answer_id)
+    if request.method == 'POST':
+        message = request.form.get('comment')
+        data_manager.write_new_comment(message, question_id, answer_id)
+
+        return redirect(url_for('display_question', id=question_id, answer_id=answer_id))
+
+
 @app.route('/display_question/<id>', methods=['POST', "GET"])
 def display_question(id):
     answers=data_manager.get_all_answers()
     questions = data_manager.get_all_questions()
+    comments = data_manager.get_all_comments()
     id = int(id)
     question_data = data_manager.get_question_by_id(id)
     title = question_data['title']
@@ -57,7 +69,7 @@ def display_question(id):
 
 
     return render_template('display_question.html', questions=questions, title=title, message=message, id=id,
-                           answers=answers)
+                           answers=answers, comments=comments)
 
 @app.route('/display_question/<id>/edit', methods=['GET', 'POST'])
 def edit_question(id):
@@ -86,8 +98,6 @@ def edit_answer(id, answer_id):
 
         return redirect(url_for('display_question', id=id))
 
-
-
     if request.method == 'GET':
         id = int(id)
         message = data_manager.get_answer_by_id(answer_id)
@@ -108,6 +118,7 @@ def delete_question(id):
 
     else:
         return render_template('delete_question_confirm.html', id=id)
+
 
 @app.route("/display_question/<id>/<answer_id>/delete", methods=['POST'])
 def delete_answer(id, answer_id):

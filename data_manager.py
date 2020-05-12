@@ -137,6 +137,7 @@ def update_question_by_id(cursor, message, title, question_id):
                    {'message': message, 'id': question_id})
 
 
+@connection_handler
 def get_answer_by_id(cursor, answer_id):
     cursor.execute("""
                     SELECT message
@@ -146,8 +147,9 @@ def get_answer_by_id(cursor, answer_id):
     message = cursor.fetchall()[0]['message']
     return message
 
+
 @connection_handler
-def update_question_by_id(cursor, message, title,  question_id):
+def update_question_by_id(cursor, message, title, question_id):
     cursor.execute("""
                     UPDATE questions
                     SET message = %(message)s, title = %(title)s
@@ -180,7 +182,6 @@ def get_next_user_password_id(cursor):
     return new_id
 
 
-
 @connection_handler
 def write_new_user_login(cursor, login):
     query = ("""
@@ -188,6 +189,7 @@ def write_new_user_login(cursor, login):
         VALUES (%(id)s, %(login)s);""")
 
     cursor.execute(query, {'id': get_next_user_login_id(), 'login': login})
+
 
 @connection_handler
 def write_new_user_password(cursor, password):
@@ -204,4 +206,13 @@ def update_answer_by_id(cursor, message, answer_id):
                     UPDATE answers
                     SET message = %(message)s
                     WHERE id=%(id)s""",
-                    {'message': message, 'id': answer_id})
+                   {'message': message, 'id': answer_id})
+
+
+@connection_handler
+def write_new_comment(cursor, message, question_id, answer_id):
+    query = ("""
+            INSERT INTO comments (message, question_id, answer_id)
+            VALUES (%(message)s, %(question_id)s, %(answer_id)s)""")
+
+    cursor.execute(query, {'message': message, 'question_id': question_id, 'answer_id': answer_id})
