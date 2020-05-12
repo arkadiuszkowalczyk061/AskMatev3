@@ -42,11 +42,10 @@ def get_all_answer_headers(cursor):
 @connection_handler
 def write_data_to_questions(cursor, data_to_add):
     cursor.execute(
-        """INSERT INTO questions VALUES (%(id)s, %(title)s, %(message)s, %(submission_time)s, %(view_number)s, %(vote_number)s, %(image)s);""",
-        {'id': data_to_add['id'],
+        """INSERT INTO questions (title, message, view_number, vote_number, image) VALUES (%(title)s, %(message)s, %(view_number)s, %(vote_number)s, %(image)s);""",
+        {
          'title': data_to_add['title'],
          'message': data_to_add['message'],
-         'submission_time': data_to_add['submission_time'],
          'view_number': data_to_add['view_number'],
          'vote_number': data_to_add['vote_number'],
          'image': data_to_add['image']})
@@ -55,9 +54,8 @@ def write_data_to_questions(cursor, data_to_add):
 @connection_handler
 def write_data_to_answers(cursor, data_to_add):
     cursor.execute(
-        """INSERT INTO answers VALUES (%(id)s, %(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s);""",
-        {'id': data_to_add['id'],
-         'submission_time': data_to_add['submission_time'],
+        """INSERT INTO answers (vote_number, question_id, message) VALUES (%(vote_number)s, %(question_id)s, %(message)s);""",
+        {
          'vote_number': data_to_add['vote_number'],
          'question_id': data_to_add['question_id'],
          'message': data_to_add['message']})
@@ -72,8 +70,6 @@ def get_next_answer_id(cursor):
 
 def add_new_answer(new_answer, question_id):
     new_answer_data = {
-        "id": get_next_answer_id(),
-        "submission_time": datetime.now().replace(microsecond=0),
         "vote_number": 0,
         "question_id": question_id,
         "message": new_answer,
@@ -91,8 +87,6 @@ def get_next_question_id(cursor):
 
 def add_new_question_data():
     new_question_data = {
-        'id': get_next_question_id(),
-        'submission_time': datetime.now().replace(microsecond=0),
         'view_number': 0,
         'vote_number': 0
     }
