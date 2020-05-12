@@ -42,22 +42,20 @@ def get_all_answer_headers(cursor):
 @connection_handler
 def write_data_to_questions(cursor, data_to_add):
     cursor.execute(
-        """INSERT INTO questions VALUES (%(id)s, %(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s);""",
-        {'id': data_to_add['id'],
-         'submission_time': data_to_add['submission_time'],
-         'view_number': data_to_add['view_number'],
-         'vote_number': data_to_add['vote_number'],
+        """INSERT INTO questions (title, message, view_number, vote_number, image) VALUES (%(title)s, %(message)s, %(view_number)s, %(vote_number)s, %(image)s);""",
+        {
          'title': data_to_add['title'],
          'message': data_to_add['message'],
+         'view_number': data_to_add['view_number'],
+         'vote_number': data_to_add['vote_number'],
          'image': data_to_add['image']})
 
 
 @connection_handler
 def write_data_to_answers(cursor, data_to_add):
     cursor.execute(
-        """INSERT INTO answers VALUES (%(id)s, %(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s);""",
-        {'id': data_to_add['id'],
-         'submission_time': data_to_add['submission_time'],
+        """INSERT INTO answers (vote_number, question_id, message) VALUES (%(vote_number)s, %(question_id)s, %(message)s);""",
+        {
          'vote_number': data_to_add['vote_number'],
          'question_id': data_to_add['question_id'],
          'message': data_to_add['message']})
@@ -72,8 +70,6 @@ def get_next_answer_id(cursor):
 
 def add_new_answer(new_answer, question_id):
     new_answer_data = {
-        "id": get_next_answer_id(),
-        "submission_time": datetime.now().replace(microsecond=0),
         "vote_number": 0,
         "question_id": question_id,
         "message": new_answer,
@@ -91,8 +87,6 @@ def get_next_question_id(cursor):
 
 def add_new_question_data():
     new_question_data = {
-        'id': get_next_question_id(),
-        'submission_time': datetime.now().replace(microsecond=0),
         'view_number': 0,
         'vote_number': 0
     }
@@ -136,7 +130,7 @@ def update_question_by_id(cursor, message, title, question_id):
                     WHERE id=%(id)s""",
                    {'message': message, 'id': question_id})
 
-
+@connection_handler
 def get_answer_by_id(cursor, answer_id):
     cursor.execute("""
                     SELECT message
@@ -189,7 +183,6 @@ def write_new_user_login(cursor, login):
 
     cursor.execute(query, {'id': get_next_user_login_id(), 'login': login})
 
-
 @connection_handler
 def write_new_user_password(cursor, password):
     query = ("""
@@ -207,6 +200,21 @@ def update_answer_by_id(cursor, message, answer_id):
                     WHERE id=%(id)s""",
                     {'message': message, 'id': answer_id})
 
+@connection_handler
+def get_last_5_questions(cursor):
+    cursor.execute("""
+                    SELECT *
+                    FROM questions
+                    ORDER BY submission_time desc  LIMIT 5""")
+    return cursor.fetchall()
+
+@connection_handler
+def sort_last_questions(cursor, sorting_factor, order_direction='ASC'):
+    cursor.execute(f"""
+                    SELECT *
+                    from questions
+                    ORDER BY {sorting_factor} {order_direction} """)
+    return cursor.fetchall()
 
 
 @connection_handler
