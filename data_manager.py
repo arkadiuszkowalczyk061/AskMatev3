@@ -228,7 +228,7 @@ def get_last_5_questions(cursor):
     return cursor.fetchall()
 
 @connection_handler
-def sort_last_questions(cursor, sorting_factor, order_direction='ASC'):
+def sort_last_questions(cursor, sorting_factor, order_direction='DESC'):
     cursor.execute(f"""
                     SELECT *
                     from questions
