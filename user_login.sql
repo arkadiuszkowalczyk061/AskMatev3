@@ -4,4 +4,3 @@ id BIGSERIAL NOT NULL PRIMARY KEY,
 login VARCHAR(255) NOT NULL,
 password VARCHAR(255) NOT NULL,
 create_time timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL);
-INSERT INTO user_login (login, password) VALUES ('Marek', '$2b$12$ljh7JC9PmNaQ2OASg4OCIOFbPrlnnngPtzuTFG4I2X7G6MUTxJqaO');

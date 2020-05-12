@@ -228,8 +228,8 @@ def sort_last_questions(cursor, sorting_factor, order_direction='ASC'):
 
 
 @connection_handler
-def add_user_ta_database(cursor, login, password, time):
-    cursor.execute("""INSERT INTO user_login (login, password, time) VALUES (%s, %s, %s)""", (login, password, time))
+def add_user_ta_database(cursor, login, password):
+    cursor.execute("""INSERT INTO user_login (login, password) VALUES (%s, %s)""", (login, password))
 
 
 

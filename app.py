@@ -2,17 +2,18 @@ from flask import Flask, request, redirect, url_for, abort, render_template
 import data_manager, random, psycopg2, psycopg2.extras
 import bcrypt
 import os
+from datetime import timedelta
 
 
-app.secret_key = (os.urandom(16))
-app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 TITLES_QUESTIONS = {'title': 'Title', 'message': 'Message', 'submission_time': 'Submission Time', 'view_number': '# of views', 'vote_number':'Votes'}
 TITLES_ANSWERS = ['ID', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
-app = Flask(__name__)
 
+app = Flask(__name__)
+app.secret_key = (os.urandom(16))
+app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 @app.route('/')
@@ -160,14 +161,25 @@ def create_user():
     login = request.form.get('login')
     password = request.form.get('password')
     if request.method == 'POST':
-        data_manager.write_new_user_login(login)
-        data_manager.write_new_user_password(password)
+        hash_pass = hash_password(password)
+        print(hash_pass)
+        data_manager.add_user_ta_database(login, hash_pass)
         return redirect(url_for('index'))
 
     else:
         return render_template('registration.html')
 
 
+
+
+def hash_password(plain_password):
+    hashed_bytes = bcrypt.hashpw(plain_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
+
+
+def verify_password(plain_password, hashed_password):
+    hashed_bytes_password = hashed_password.encode('utf-8')
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_bytes_password)
 
 
 
