@@ -209,7 +209,7 @@ def update_answer_by_id(cursor, message, answer_id):
 @connection_handler
 def get_last_5_questions(cursor):
     cursor.execute("""
-                    SELECT id, title, message
+                    SELECT *
                     FROM questions
                     ORDER BY submission_time desc  LIMIT 5""")
     return cursor.fetchall()
