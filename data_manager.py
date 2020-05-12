@@ -114,6 +114,15 @@ def delete_answer(cursor, answer_id):
 
 
 @connection_handler
+def delete_comment(cursor, comment_id):
+    query = """
+            DELETE FROM comments
+            WHERE id=%(comment_id)s;"""
+
+    cursor.execute(query, {'comment_id': comment_id})
+
+
+@connection_handler
 def get_question_by_id(cursor, question_id):
     cursor.execute("""SELECT * FROM questions
                     WHERE id=%(id)s;""",

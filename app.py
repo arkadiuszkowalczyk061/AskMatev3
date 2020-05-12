@@ -86,6 +86,7 @@ def display_question(id):
     return render_template('display_question.html', questions=questions, title=title, message=message, id=id,
                            answers=answers, comments=comments)
 
+
 @app.route('/display_question/<id>/edit', methods=['GET', 'POST'])
 def edit_question(id):
 
@@ -103,6 +104,7 @@ def edit_question(id):
         data_manager.update_question_by_id(updated_message, updated_title, id)
 
         return redirect(url_for('display_question', id=id))
+
 
 @app.route('/display_question/<id>/<answer_id>/edit', methods=['POST', 'GET'])
 def edit_answer(id, answer_id):
@@ -145,6 +147,15 @@ def delete_answer(id, answer_id):
 
     else:
         return redirect('display_question.html')
+
+@app.route("/display_question/<id>/<answer_id>/<comment_id>/delete", methods=['POST'])
+def delete_comment(id, answer_id, comment_id):
+    int(id)
+    int(answer_id)
+
+    if request.method == 'POST':
+        data_manager.delete_comment(comment_id)
+        return redirect(url_for('display_question', id=id, answer_id=answer_id))
 
 
 @app.route('/register', methods=['POST', 'GET'])
