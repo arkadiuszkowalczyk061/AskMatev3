@@ -1,13 +1,14 @@
 {%  extends 'layout.html' %}
 {% block title %}result{% endblock %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style2.css') }}", media="all"/>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}", media="all"/>
 
 {% block content %}
 
     {% if no_user %}
-    <p> 'This login exist in database , please choose another'</p>
-        
+        <p> This login exist in database , please choose another</p>
+    {%  elif wrong_pass %}
+         <p> Your login or password is wrong , please log in again</p>
     {% endif %}
-    <a href="{{ url_for('index')}}"><button type="button"><strong>back</strong></button></a>
+    <a href="{{ url_for('index')}}"><input type="button" value="back"></a>
 
 {% endblock %}

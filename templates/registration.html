@@ -1,26 +1,21 @@
-
-
-
-
-<head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style2.css') }}", media="all"/>
-</head>
-
-{% block title %}
-    {{ title }}
-{% endblock %}
+{%  extends 'layout_2.html' %}
+{% block title %}registration{% endblock %}
 
 {% block content %}
-<h3>{{ title }}</h3>
-<body>
+
+{#    <div style="background-image: url(../static/img/morph.jpg);"></div>#}
     <div id="registration">
         {% if login %}
             <form action="{{ url_for('login') }}", method="post">
         {%  else %}
             <form action="{{ url_for('create_user') }}", method="post">
         {% endif %}
-            <input type="text" placeholder="login" name="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'">
-			<input type="password" placeholder="password" name="password" onfocus="this.placeholder=''" onblur="this.placeholder='password'">
+            <div class="input-icons"><i class="fa fa-user icon"></i>
+                <input class="input-field" type="text" placeholder="login" name="login" required minlength="5" onfocus="this.placeholder=''" onblur="this.placeholder='login'">
+			</div>
+			<div class="input-icons"><i class="fa fa-key icon"></i>
+                <input class="input-field" type="password" placeholder="password" name="password" required minlength="5"  onfocus="this.placeholder=''" onblur="this.placeholder='password'">
+			</div>
         {% if login  %}
             <input type="submit" value="Log in" >
         {% else %}
@@ -30,6 +25,5 @@
             </form>
 
     </div>
-</body>
 
-{% endblock %}
+{% endblock content %}

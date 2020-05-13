@@ -5,8 +5,6 @@ import os
 from datetime import timedelta
 
 
-
-
 TITLES_QUESTIONS = {'title': 'Title', 'message': 'Message', 'submission_time': 'Submission Time', 'view_number': '# of views', 'vote_number':'Votes'}
 TITLES_ANSWERS = ['ID', 'submission_time', 'vote_number', 'question_id', 'message', 'image']
 
@@ -226,7 +224,8 @@ def login():
         result = [dict(row) for row in check]
         print(result)
         if len(result) < 1:
-            return render_template('registration.html')
+            wrong_pass = 'yes'
+            return render_template('response_server.html', wrong_pass=wrong_pass)
 
         to_check = (result[0]['password'])
         if verify_password(haslo, to_check):
@@ -235,7 +234,8 @@ def login():
             session['user'] = user
             return redirect(url_for('in_session', user=user))
         else:
-            return 'You login or password are wrong'
+            wrong_pass = 'yes'
+            return render_template('response_server.html', wrong_pass=wrong_pass)
     return render_template('registration.html', login=auxiliary)
 
 
@@ -269,4 +269,5 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run(debug= True)
+    app.run(debug= True,
+            port = 5000)
