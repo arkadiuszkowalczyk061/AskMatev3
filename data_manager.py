@@ -240,9 +240,38 @@ def sort_last_questions(cursor, sorting_factor, order_direction='DESC'):
 def add_user_ta_database(cursor, login, password):
     cursor.execute("""INSERT INTO user_login (login, password) VALUES (%s, %s)""", (login, password))
 
-
+@connection_handler
+def get_all_votes_from_answers_by_question_id(cursor, question_id):
+    cursor.execute(f"""
+                    SELECT id, vote_number
+                    FROM answers
+                    WHERE question_id={question_id}""")
+    return cursor.fetchall()
 
 @connection_handler
+def get_number_of_votes_by_id(cursor, id, table):
+    cursor.execute(f"""
+                    SELECT vote_number 
+                    FROM {table}
+                    WHERE id={id}
+                    """)
+    return cursor.fetchall()
+
+@connection_handler
+def increase_vote_number_by_id(cursor, table, id):
+    cursor.execute(f"""
+                    UPDATE {table}
+                    SET vote_number = vote_number + 1
+                    WHERE id = {id}""")
+
+@connection_handler
+def decrease_vote_number_by_id(cursor, table, id):
+    cursor.execute(f"""
+                    UPDATE {table}
+                    SET vote_number = vote_number -1
+                    WHERE id = {id}""")
+
+
 def search_user(cursor, login):
     cursor.execute("""SELECT * FROM user_login WHERE login = (%s)""", (login, ))
     data = cursor.fetchall()
