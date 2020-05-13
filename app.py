@@ -86,6 +86,8 @@ def display_question(id):
     answers=data_manager.get_all_answers()
     questions = data_manager.get_all_questions()
     comments = data_manager.get_all_comments()
+    question_votes = data_manager.get_number_of_votes_by_id(id, 'questions' )
+    answer_votes = data_manager.
     id = int(id)
     question_data = data_manager.get_question_by_id(id)
     title = question_data['title']
@@ -114,6 +116,33 @@ def edit_question(id):
 
         return redirect(url_for('display_question', id=id))
 
+@app.route('/display_question/<id>/<answer_id>/vote', methods=['GET', 'POST'])
+@app.route('/display_question/<id>/vote', methods=['GET', 'POST'])
+def vote_manager(id, answer_id=None):
+    table = request.form.get('table')
+    operation = request.form.get('vote_operation')
+
+    if answer_id:
+
+        answer_id=answer_id
+
+        if operation == 'increase':
+            data_manager.increase_vote_number_by_id(table, answer_id)
+            return redirect(url_for('display_question', id=id))
+
+        elif operation == 'decrease':
+            data_manager.decrease_vote_number_by_id(table, answer_id)
+            return redirect(url_for('display_question', id=id))
+
+    else:
+
+        if operation == 'increase':
+            data_manager.increase_vote_number_by_id(table, id)
+            return redirect(url_for('display_question', id=id))
+
+        elif operation == 'decrease':
+            data_manager.decrease_vote_number_by_id(table, id)
+            return redirect(url_for('display_question', id=id))
 
 @app.route('/display_question/<id>/<answer_id>/edit', methods=['POST', 'GET'])
 def edit_answer(id, answer_id):
