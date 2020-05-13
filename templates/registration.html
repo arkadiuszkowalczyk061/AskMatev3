@@ -1,5 +1,6 @@
+
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}", media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style2.css') }}", media="all"/>
 </head>
 
 {% block title %}
@@ -9,18 +10,21 @@
 {% block content %}
 <h3>{{ title }}</h3>
 <body>
-    <div id="registration">
+    <div class="registration">
         {% if login %}
             <form action="{{ url_for('login') }}", method="post">
         {%  else %}
             <form action="{{ url_for('create_user') }}", method="post">
         {% endif %}
-            <label id="login">New user name</label>
-            <input type="text" name="login" id="login"><br>
-            <label id="password">password</label>
-            <input type="password" id="password" name="password"><br>
-            <button type="submit">submit</button>
-        </form>
+            <input type="text" placeholder="login" name="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'">
+			<input type="password" placeholder="password" name="password" onfocus="this.placeholder=''" onblur="this.placeholder='password'">
+        {% if login  %}
+            <input type="submit" value="Log in" >
+        {% else %}
+			<input type="submit" value="Register" >
+        {% endif %}
+
+            </form>
 
     </div>
 </body>

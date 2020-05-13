@@ -1,0 +1,13 @@
+{%  extends 'layout.html' %}
+{% block title %}result{% endblock %}
+
+
+{% block content %}
+
+    {% if no_user %}
+    <p> 'This login exist in database , please choose another'</p>
+        
+    {% endif %}
+    <a href="{{ url_for('index')}}"><button type="button"><strong>back</strong></button></a>
+
+{% endblock %}

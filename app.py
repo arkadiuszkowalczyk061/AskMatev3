@@ -178,11 +178,12 @@ def create_user():
             data_manager.add_user_ta_database(login, hash_pass)
             return redirect(url_for('index'))
         else:
-            """ADD requiments big letter small terers """
-            return "Login is in data , please another login"
+            no_user = 'yes'
+            return render_template('response_server.html', no_user=no_user)
 
     else:
         return render_template('registration.html')
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -193,8 +194,8 @@ def login():
         check = data_manager.search_user(user)
         result = [dict(row) for row in check]
         if len(result) < 1:
-            return 'You login or password are wrong'
-        """print(len(check))  if len > 0 , else wrong password or login"""
+            return render_template('registration.html')
+
         to_check = (result[0]['password'])
         if verify_password(haslo, to_check):
             session.permanent = True
