@@ -58,16 +58,15 @@
                     {% endif %}
                 {% endfor %}<br>
 
-                    {% for comment in comments %}
-                        {% if comment.question_id == id and comment.answer_id == answer.id %}
-                            {{ comment.message }}<br>
-                            <label id="comment" for="comment" > {{ comment.message }}
-                            <form id="delete_comment" action="{{ url_for('delete_comment', id=id, answer_id=answer.id, comment_id=comment.id) }}" method="post">
-                                <input type="image" id="delete_comment" name="delete_comment" src="https://cdn.pixabay.com/photo/2012/04/12/20/12/x-30465_960_720.png" border="0" height="1.5%" alt="Submit" />
-                            </form>
-                            </label><br>
-                        {% endif %}
-                    {% endfor %}
+                {% for comment in comments %}
+                    {% if comment.question_id == id and comment.answer_id == answer.id %}
+                        <label id="comment" for="comment" > {{ comment.message }}
+                        <form id="delete_comment" action="{{ url_for('delete_comment', id=id, answer_id=answer.id, comment_id=comment.id) }}" method="post">
+                            <input type="image" id="delete_comment" name="delete_comment" src="https://cdn.pixabay.com/photo/2012/04/12/20/12/x-30465_960_720.png" border="0" height="1.5%" alt="Submit" />
+                        </form>
+                        </label><br>
+                    {% endif %}
+                {% endfor %}
 
                 <form action="{{ url_for('add_comment', question_id=id, answer_id=answer.id) }}" method="post">
                     <input type="text" name="comment" id="comment" alt="submit">
