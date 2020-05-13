@@ -22,10 +22,11 @@
         <input type="hidden" id="vote_operation" name="vote_operation" value="decrease">
         <input type="image" id="thumbs-up" name="thumbs-up" src="/static/output-onlinepngtools (5).png" border="0" height="2%" alt="Submit">
     </form>
-
+        {% for dict in question_votes %}
+            {{ dict['vote_number'] }}
+        {% endfor %}
     </label>
     <h3>Answers:</h3>
-
     {% for answer in answers %}
         {% for key, value in answer.items() %}
             {% if key == 'message' and answer.get('question_id') == id%}
@@ -49,7 +50,11 @@
                         <input type="hidden" id="vote_operation" name="vote_operation" value="decrease">
                         <input type="image" id="thumbs-up" name="thumbs-up" src="/static/output-onlinepngtools (5).png" border="0" height="2%" alt="Submit">
                     </form>
-
+                    {% for answer_votes in answers_votes %}
+                        {% if answer_votes['id'] == answer['id']  %}
+                            {{ answer_votes['vote_number'] }}
+                        {% endif %}
+                    {% endfor %}<br>
                     {% for comment in comments %}
                         {% if comment.question_id == id and comment.answer_id == answer.id %}
 
@@ -59,15 +64,12 @@
                             </form>
                             </label><br>
                         {% endif %}
-
                     {% endfor %}
-
                 <form action="{{ url_for('add_comment', question_id=id, answer_id=answer.id) }}" method="post">
                     <input type="text" name="comment" id="comment" alt="submit">
                 </form>
             {% endif %}
         {% endfor %}
-
     {% endfor %}
 
 

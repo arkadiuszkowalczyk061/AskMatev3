@@ -92,10 +92,11 @@ def display_question(id):
     question_data = data_manager.get_question_by_id(id)
     title = question_data['title']
     message = question_data['message']
+    print(question_votes, answer_votes)
 
 
     return render_template('display_question.html', questions=questions, title=title, message=message, id=id,
-                           answers=answers, comments=comments)
+                           answers=answers, comments=comments, question_votes=question_votes, answers_votes=answer_votes)
 
 
 @app.route('/display_question/<id>/edit', methods=['GET', 'POST'])

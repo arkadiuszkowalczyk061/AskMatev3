@@ -243,7 +243,7 @@ def add_user_ta_database(cursor, login, password):
 @connection_handler
 def get_all_votes_from_answers_by_question_id(cursor, question_id):
     cursor.execute(f"""
-                    SELECT vote_number
+                    SELECT id, vote_number
                     FROM answers
                     WHERE question_id={question_id}""")
     return cursor.fetchall()
@@ -275,6 +275,3 @@ def search_user(cursor, login):
     cursor.execute("""SELECT * FROM user_login WHERE login = (%s)""", (login, ))
     data = cursor.fetchall()
     return data
-
-
-
