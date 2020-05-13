@@ -220,9 +220,11 @@ def login():
     auxiliary = 'yes'
     if request.method == 'POST':
         user = request.form.get('login')
+        print(user)
         haslo = request.form.get('password')
         check = data_manager.search_user(user)
         result = [dict(row) for row in check]
+        print(result)
         if len(result) < 1:
             return render_template('registration.html')
 
