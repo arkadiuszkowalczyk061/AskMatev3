@@ -100,17 +100,21 @@ def delete_question(cursor, id):
                 WHERE id = %(id)s;
                 DELETE FROM answers
                 WHERE question_id = %(id)s;
+                DELETE FROM comments
+                WHERE question_id = %(id)s;
                 """,
                    {'id': id})
 
 
 @connection_handler
-def delete_answer(cursor, answer_id):
+def delete_answer(cursor, answer_id, id):
     cursor.execute("""
                 DELETE FROM answers
                 WHERE id=%(answer_id)s;
+                DELETE FROM comments
+                WHERE question_id = %(id)s
                 """,
-                   {'answer_id': answer_id})
+                   {'answer_id': answer_id, 'id': id})
 
 
 @connection_handler

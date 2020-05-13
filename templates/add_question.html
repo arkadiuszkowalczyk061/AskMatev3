@@ -1,13 +1,15 @@
-<head>
+{% extends 'layout.html' %}
+{% block header %}
+
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}", media="all"/>
     <style>
         textarea {
-            width: 80%;
+            width: 40%;
             height: 200px;
-            padding: 12px 20px;
-            margin: 2px;
+            padding: 12px 80px;
+            margin: 150px;
             box-sizing: border-box;
-            background-color: #1f2833;
+            background-color:  white;
             resize: none;
             border: none;
             font-size: 16px;
@@ -21,7 +23,7 @@
             box-sizing: border-box;
             border: none;
             resize: none;
-            background-color: #1f2833;
+            background-color: white;
             font-size: 16px;
             color: #c5c6c7;
             position: relative;
@@ -44,8 +46,8 @@
             font-size: 22px;
         }
     </style>
-</head>
-
+{% endblock header %}
+{% block content %}
     {% if message %}
         <p>{{ message }}</p>
     {% endif %}
@@ -54,6 +56,7 @@
         <label id="Title_label"><h2>TITLE</h2></label><br>
         <input type="text" id="Title" name="Title"><br><br>
         <label id="description"><h2>DESCRIPTION</h2></label><br>
-        <textarea name="Message" id="Message" rows="5" cols="60"></textarea><br>
+        <textarea name="Message" id="Message"></textarea><br>
         <button id="button_submit" type="submit">Submit</button>
     </form>
+{% endblock content %}

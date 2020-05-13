@@ -182,7 +182,7 @@ def delete_answer(id, answer_id):
     int(id)
 
     if request.method == 'POST':
-        data_manager.delete_answer(answer_id)
+        data_manager.delete_answer(answer_id, id)
         return redirect(url_for('display_question', id=id))
 
     else:
