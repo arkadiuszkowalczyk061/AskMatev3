@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}", media="all"/>
 </head>
 <body>
+    {% if session %}
+     WELCOME {{ user }}
+    {% endif %}
     <img class="orangutan" src="/static/XD.jpg">
         <div>
         <form action="{{ url_for('index') }}">
@@ -17,13 +20,13 @@
     <div>
         <table>
             {% for key, value in titles.items() %}
-                <th>{{ value }}<br> <form action="{{ url_for('sort_questions') }}" method="post">
+                <th>{{ value }}<br>
+                    <form action="{{ url_for('sort_questions') }}" method="post">
                     <input type="hidden" name="order_by" value="{{ key }}">
                     <select onchange="this.form.submit()" id="order" name="order">
                         <option value="ASC">ASCENDING</option>
                         <option value="DESC">DESCENDING</option>
                     </select>
-
                 </form>
                 </th>
             {% endfor %}
@@ -41,6 +44,11 @@
         </table>
     </div>
     <a href="{{ url_for('create_user') }}">Register</a>
+    {% if session %}
+        <a href="{{ url_for('logout') }}">LOG OUT</a>
+    {%  else %}
+        <a href="{{ url_for('login') }}">log in</a>
+    {% endif %}
     <a class="button" href="{{ url_for('add_question') }}">ADD QUESTION</a>
     <a href="{{ url_for('list_questions') }}">See all questions</a>
     <a href="{{ url_for('index') }}">HOME</a>

@@ -1,2 +1,2 @@
-DROP TABLE IF EXISTS public.answers;DROP TABLE IF EXISTS public.answers;
+DROP TABLE IF EXISTS public.answers;
 CREATE TABLE public.answers (id BIGSERIAL NOT NULL PRIMARY KEY , submission_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, vote_number INTEGER, question_id INTEGER, message TEXT);

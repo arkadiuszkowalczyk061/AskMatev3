@@ -187,3 +187,12 @@ label {
 #edit_answer {
     display: inline-block;
 }
+
+#delete_comment {
+    display: inline-block;
+    color: white;
+}
+
+#comment {
+    color: #c5c6c7;
+}
