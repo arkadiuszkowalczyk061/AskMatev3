@@ -270,3 +270,11 @@ def decrease_vote_number_by_id(cursor, table, id):
                     UPDATE {table}
                     SET vote_number = vote_number -1
                     WHERE id = {id}""")
+
+def search_user(cursor, login):
+    cursor.execute("""SELECT * FROM user_login WHERE login = (%s)""", (login, ))
+    data = cursor.fetchall()
+    return data
+
+
+
