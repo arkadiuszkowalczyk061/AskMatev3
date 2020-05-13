@@ -62,3 +62,13 @@ def connection_handler_list(function):
         return ret_value
 
     return wrapper
+
+
+def connection_withoutdict(function):
+    def wrapper(*args):
+        connection = open_database()
+        cur = connection.cursor()
+        ret_value = function(cur, *args)
+        connection.close()
+        return ret_value
+    return wrapper

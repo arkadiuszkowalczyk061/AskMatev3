@@ -1,6 +1,6 @@
-from connection import connection_handler, connection_handler_list
+from connection import connection_handler, connection_handler_list, connection_withoutdict
 from datetime import datetime
-
+from functools import reduce
 
 @connection_handler
 def get_all_answers(cursor):
@@ -246,7 +246,14 @@ def add_user_ta_database(cursor, login, password):
 def search_user(cursor, login):
     cursor.execute("""SELECT * FROM user_login WHERE login = (%s)""", (login, ))
     data = cursor.fetchall()
+
     return data
 
 
+@connection_withoutdict
+def check_user(cursor):
+    cursor.execute("""SELECT login FROM user_login """)
+    all_data = cursor.fetchall()
+    data = [(reduce(lambda red: red, user)) for user in  all_data]
+    return data
 

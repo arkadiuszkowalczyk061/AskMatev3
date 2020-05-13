@@ -13,7 +13,7 @@ TITLES_ANSWERS = ['ID', 'submission_time', 'vote_number', 'question_id', 'messag
 
 app = Flask(__name__)
 app.secret_key = (os.urandom(16))
-app.permanent_session_lifetime = timedelta(minutes=5)
+app.permanent_session_lifetime = timedelta(seconds=5)
 
 
 @app.route('/')
@@ -25,6 +25,7 @@ def index():
         questions = data_manager.get_last_5_questions()
 
     return render_template('index.html', questions=questions, titles=TITLES_QUESTIONS)
+
 
 @app.route('/', methods=['POST'])
 def sort_questions():
@@ -172,10 +173,13 @@ def create_user():
     login = request.form.get('login')
     password = request.form.get('password')
     if request.method == 'POST':
-        hash_pass = hash_password(password)
-        print('password')
-        data_manager.add_user_ta_database(login, hash_pass)
-        return redirect(url_for('index'))
+        if login not in data_manager.check_user():
+            hash_pass = hash_password(password)
+            data_manager.add_user_ta_database(login, hash_pass)
+            return redirect(url_for('index'))
+        else:
+            """ADD requiments big letter small terers """
+            return "Login is in data , please another login"
 
     else:
         return render_template('registration.html')
@@ -188,6 +192,8 @@ def login():
         haslo = request.form.get('password')
         check = data_manager.search_user(user)
         result = [dict(row) for row in check]
+        if len(result) < 1:
+            return 'You login or password are wrong'
         """print(len(check))  if len > 0 , else wrong password or login"""
         to_check = (result[0]['password'])
         if verify_password(haslo, to_check):
@@ -212,11 +218,13 @@ def verify_password(plain_password, hashed_password):
     return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_bytes_password)
 
 
+
 @app.route('/index/<user>')
 def in_session(user):
     if 'user' in session:
         user = escape(session['user'])
     return render_template('index.html', user=user, titles=TITLES_QUESTIONS)
+
 
 
 @app.route('/logout')
