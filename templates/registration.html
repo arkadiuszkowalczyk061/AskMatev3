@@ -1,4 +1,7 @@
 
+
+
+
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style2.css') }}", media="all"/>
 </head>
@@ -10,7 +13,7 @@
 {% block content %}
 <h3>{{ title }}</h3>
 <body>
-    <div class="registration">
+    <div id="registration">
         {% if login %}
             <form action="{{ url_for('login') }}", method="post">
         {%  else %}
