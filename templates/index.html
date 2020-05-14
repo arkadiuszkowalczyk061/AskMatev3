@@ -21,7 +21,7 @@
                     <li><a href="{{ url_for('add_question') }}"> Add Question</a></li>
                     <li><a href="{{ url_for('list_questions') }}"> Full Questions List </a></li>
                             {% if session %}
-                                <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                                <li><a href="{{ url_for('logout', user=user) }}">Log out</a></li>
                             {%  else %}
                                 <li><a href="{{ url_for('chosen_one') }}">User Panel</a></li>
                             {% endif %}

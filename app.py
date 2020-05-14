@@ -230,7 +230,7 @@ def login():
         if verify_password(haslo, to_check):
             # session.permanent = True
             user = (result[0]['login'])
-            session[user] = user
+            session['user'] = user
 
             return redirect(url_for('in_session', user=user))
         else:
@@ -259,9 +259,9 @@ def in_session(user):
 
 
 
-@app.route('/logout/<user>')
-def logout(user):
-    session.pop(user, None)
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
     return redirect(url_for('index'))
 
 

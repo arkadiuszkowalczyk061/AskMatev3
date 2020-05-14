@@ -5,6 +5,7 @@
         <li><a href="{{ url_for('add_question') }}"> Add Question</a></li>
         <li><a href="{{ url_for('list_questions') }}"> Full Questions List </a></li>
                 {% if session %}
+                    {{ user }}
                     <li><a href="{{ url_for('logout') }}">Log out</a></li>
                 {%  else %}
                     <li><a href="{{ url_for('chosen_one') }}">Log in</a></li>
