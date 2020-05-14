@@ -160,3 +160,20 @@ input:focus::-webkit-input-placeholder {
     margin-bottom: 500px;
     vertical-align: super;
 }
+
+.log_pass{
+    position: relative;
+}
+.log_pass #login {
+    position: absolute;
+    left: 220px;
+    top: 50px;
+    opacity: 0;
+
+}
+#password {
+    position: absolute;
+    left: 1130px;
+    top: 90px;
+    opacity: 0;
+}

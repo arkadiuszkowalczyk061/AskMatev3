@@ -1,0 +1,12 @@
+{%  extends 'layout_2.html' %}
+
+
+{% block content %}
+    <div class="content">
+    <div class="log_pass">
+        <a id='login' href="{{ url_for('login') }}"><img src="/static/hajtox.png"></a>
+        <a id='password' href="{{ url_for('create_user') }}"><img src="/static/hajtox.png"></a>
+    </div>
+    </div>
+
+{% endblock content %}

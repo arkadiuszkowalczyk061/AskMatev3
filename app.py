@@ -265,6 +265,9 @@ def logout(user):
     return redirect(url_for('index'))
 
 
+@app.route('/chosen_one')
+def chosen_one():
+    return render_template('chosen_one.html')
 
 def check_if_logged(user):
     if user in session:
