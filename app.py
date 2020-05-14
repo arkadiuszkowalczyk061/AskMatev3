@@ -254,7 +254,7 @@ def verify_password(plain_password, hashed_password):
 
 @app.route('/index/<user>')
 def in_session(user):
-        return render_template('index.html', user=user, titles=TITLES_QUESTIONS)
+        return redirect( url_for('index', user=user))
 
 
 

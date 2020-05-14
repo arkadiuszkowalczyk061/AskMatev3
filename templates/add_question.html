@@ -19,7 +19,11 @@
                 <label>DESCRIPTION</label>
                 <textarea name="Message" id="Message"></textarea>
             </div>
-            <input class="button" type="image" src="/static/hajtox.png" alt="Submit" name="">
+            {% if not session %}
+            <input disabled class="button" type="image" src="/static/hajtox.png" alt="Submit" name="">
+            {% else %}
+            <input  class="button" type="image" src="/static/hajtox.png" alt="Submit" name="">
+            {% endif %}
         </form>
     </body>
         <div class="foot">
