@@ -56,15 +56,96 @@ body{
     padding-right: 15px;
 }
 
+.search_bar {
+    padding-top: 7px;
+    padding-left: 20px;
+    margin-left: 35px;
+}
+.search_button {
+    height: 35px;
+    width: 80px;
+    background-color: dodgerblue;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 8px;
+    border: none;
+    color: floralwhite;
+
+}
+
+.search_button:hover {
+    background-color: red;
+}
+
 .showcase {
     background-color: #ffdd99;
 }
 
-.table td {
-    background-color: #ffffb3;
-    color:black;
+
+.table {
+    margin-top: 100px;
+    border-collapse: separate;
+    border:solid black 1px;
+    border-radius: 15px;
+    border-spacing: 0;
+    overflow: hidden;
+    display: inline-block;
 }
 
+
+.table td {
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 10px;
+    color:black;
+    padding-right: 50px;
+    padding-bottom: 25px;
+    padding-left: 10px;
+}
+
+.table td:nth-child(3){
+    font-weight: normal;
+}
+
+.table td:nth-child(4){
+    font-weight: normal;
+}
+
+.table td:nth-child(5){
+    font-weight: normal;
+}
+
+.table tr:nth-child(even){
+    background: floralwhite;
+}
+
+.table tr:nth-child(odd){
+    background: #f6f6f6;
+}
+
+
 .table th {
-    background: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg") ;
+    background-color: #ffdd99;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table a {
+    color: #c157c1;
+    text-decoration: none;
+}
+
+table a:hover {
+    color: #1ac6ff;
+}
+
+.vote_system {
+    position: relative;
+}
+
+.vote_system p {
+    position: absolute;
+    bottom: 10px;
+    left: 225px;
 }
