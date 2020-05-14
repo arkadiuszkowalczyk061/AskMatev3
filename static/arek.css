@@ -1,0 +1,70 @@
+body{
+    /*background-color: #A8D0E6;*/
+    background: url("https://www.c7med.pl/wp-content/uploads/2017/07/blue-abstract-background.jpg");
+    color: white;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 1.6em;
+    margin: 0;
+}
+
+.main_header {
+    background-color: #1ac6ff;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    font-size: 36px;
+}
+
+.clr {
+    clear: both;
+}
+
+.container{
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+
+.nav-bar {
+    /*background-color: #ccb3ff;*/
+    background: url("https://www.epicentrofestival.com/wp-content/uploads/2020/01/epicentrofestival-desktop-wallpaper-sky-computer-pattern-light-blue-abstract-background-png-eockz6n8av-720x416.jpg");
+    text-align: center;
+}
+
+.nav-bar ul {
+    padding: 0;
+    list-style: none;
+
+}
+
+.nav-bar li {
+    display: inline;
+}
+
+.nav-bar form {
+    display: inline;
+    padding-left: 20px;
+}
+
+.nav-bar a{
+    color: white;
+    text-decoration: none;
+    font-size: 36px;
+    padding-right: 15px;
+}
+
+.showcase {
+    background-color: #ffdd99;
+}
+
+.table td {
+    background-color: #ffffb3;
+    color:black;
+}
+
+.table th {
+    background: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg") ;
+}
