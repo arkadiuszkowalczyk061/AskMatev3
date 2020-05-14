@@ -23,7 +23,7 @@
                             {% if session %}
                                 <li><a href="{{ url_for('logout') }}">Log out</a></li>
                             {%  else %}
-                                <li><a href="{{ url_for('chosen_one') }}">Log in</a></li>
+                                <li><a href="{{ url_for('chosen_one') }}">User Panel</a></li>
                             {% endif %}
                     <li>
                         <form action="{{ url_for('index') }}">

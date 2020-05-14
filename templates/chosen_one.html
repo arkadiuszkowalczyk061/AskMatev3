@@ -1,7 +1,10 @@
 {%  extends 'layout_2.html' %}
-
+{% block title %}registration{% endblock %}
 
 {% block content %}
+
+    {% include 'layout.html' %}
+
     <div class="content">
     <div class="log_pass">
         <a id='login' href="{{ url_for('login') }}"><img src="/static/hajtox.png"></a>
