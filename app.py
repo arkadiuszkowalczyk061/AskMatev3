@@ -11,7 +11,7 @@ TITLES_ANSWERS = ['ID', 'submission_time', 'vote_number', 'question_id', 'messag
 
 app = Flask(__name__)
 app.secret_key = (os.urandom(16))
-app.permanent_session_lifetime = timedelta(seconds=5)
+app.permanent_session_lifetime = timedelta(minutes=5)
 
 
 @app.route('/')

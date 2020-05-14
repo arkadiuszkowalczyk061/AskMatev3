@@ -2,11 +2,19 @@
 body ,html{
 
     background-image: url("../img/red-pill-blue-pill.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
     font-size: 20px;
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
 }
+.content{
+    height: 600px;
+}
 
 #registration {
+    box-sizing: border-box;
+    height: 300px;
+    position: relative;
     width: 400px;
     /* Background pattern from Toptal Subtle Patterns */
     background-image: url("../img/blue-pill.jpg");
@@ -71,17 +79,32 @@ input:focus::-webkit-input-placeholder {
 
 }
 
+
 .input-icons i {
         margin-left: 10px;
-        position: fixed;
+        position: absolute;
         line-height:60px
 }
 
 .input-icons {
+    top:20px;
+    left: 50px;
+    position: absolute;
     width: 100%;
     margin-bottom: 10px;
 }
-
+.input-icons-2 i {
+        margin-left: 10px;
+        position: absolute;
+        line-height:70px;
+}
+.input-icons-2 {
+    top: 120px;
+    left: 50px;
+    position: absolute;
+    width: 100%;
+    margin-bottom: 10px;
+}
 .icon {
     padding: 10px;
     color: #24c412;
@@ -93,14 +116,18 @@ input:focus::-webkit-input-placeholder {
     padding: 10px;
     text-align: center;
 }
-
+.log {
+    position: absolute;
+    top: 200px;
+}
 .footer {
-    height: 100px;
+    position: absolute;
+    height: 50px;
     text-align: center;
     background-color: #222222;
     color: #FFFFFF;
     padding-top: 10px;
     width: 100%;
-    bottom: 0;
+
     font-size: 36px;
 }

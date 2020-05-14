@@ -17,6 +17,9 @@
     {% if session %}
      WELCOME {{ user }}
     {% endif %}
+    {% if not session %}
+    If you want add question , you have to log in
+    {% endif %}
     <img class="orangutan" src="/static/XD.jpg">
         <div>
         <form action="{{ url_for('index') }}">
@@ -54,7 +57,8 @@
     <a href="{{ url_for('create_user') }}">Register</a>
     {% if session %}
         <a href="{{ url_for('logout') }}">LOG OUT</a>
-    {%  else %}
+    {% endif %}
+    {%  if not session %}
         <a href="{{ url_for('login') }}">log in</a>
     {% endif %}
 {% endblock %}
