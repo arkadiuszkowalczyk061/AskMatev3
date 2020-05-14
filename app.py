@@ -218,20 +218,20 @@ def login():
     auxiliary = 'yes'
     if request.method == 'POST':
         user = request.form.get('login')
-        print(user)
+
         haslo = request.form.get('password')
         check = data_manager.search_user(user)
         result = [dict(row) for row in check]
-        print(result)
         if len(result) < 1:
             wrong_pass = 'yes'
             return render_template('response_server.html', wrong_pass=wrong_pass)
 
         to_check = (result[0]['password'])
         if verify_password(haslo, to_check):
-            session.permanent = True
+            # session.permanent = True
             user = (result[0]['login'])
-            session['user'] = user
+            session[user] = user
+
             return redirect(url_for('in_session', user=user))
         else:
             wrong_pass = 'yes'
@@ -254,18 +254,23 @@ def verify_password(plain_password, hashed_password):
 
 @app.route('/index/<user>')
 def in_session(user):
-    if 'user' in session:
-        user = escape(session['user'])
-    return render_template('index.html', user=user, titles=TITLES_QUESTIONS)
+        return render_template('index.html', user=user, titles=TITLES_QUESTIONS)
 
 
 
-@app.route('/logout')
-def logout():
-    session.pop('user', None)
+
+@app.route('/logout/<user>')
+def logout(user):
+    session.pop(user, None)
     return redirect(url_for('index'))
 
 
+def check_if_logged(user):
+    if user in session:
+        user = session[user]
+    else:
+        user = None
+    return user
 
 
 if __name__ == '__main__':
