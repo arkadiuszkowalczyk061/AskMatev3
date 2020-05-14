@@ -28,9 +28,8 @@
                             {% endif %}
                     <li>
                         <form action="{{ url_for('index') }}">
-                        <label for="search_bar">Search: </label>
-                        <input type="text" id="search_bar" name="search">
-                        <button type="submit">submit</button>
+                        <input class="search_bar" type="text" id="search_bar" name="search">
+                        <button class="search_button" type="submit">Search</button>
                         </form>
                     </li>
                 </ul>
@@ -45,8 +44,9 @@
                             <form action="{{ url_for('sort_questions') }}" method="post">
                             <input type="hidden" name="order_by" value="{{ key }}">
                             <select onchange="this.form.submit()" id="order" name="order">
-                                <option value="ASC">ASCENDING</option>
-                                <option value="DESC">DESCENDING</option>
+                                <option value="" selected="selected">Sort by:</option>
+                                <option value="ASC">Ascending</option>
+                                <option value="DESC">Descending</option>
                             </select>
                         </form>
                         </th>
