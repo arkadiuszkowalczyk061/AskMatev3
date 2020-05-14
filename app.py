@@ -265,6 +265,7 @@ def logout(user):
     return redirect(url_for('index'))
 
 
+
 def check_if_logged(user):
     if user in session:
         user = session[user]

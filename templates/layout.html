@@ -2,7 +2,15 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .collapse, .navbar-expand-lg, .navbar-light, .bg-light, .navbar-brand, #navbarNav, .navbar-toggler{
+            background-color: #A8D0E6;
+        }
+        .body{
+            background-color: ;
+        }
 
+    </style>
     <meta charset="UTF-8">
     {% if page_title %}
         <title>{{ page_title }}</title>
@@ -15,6 +23,7 @@
     {% block header %} {% endblock %}
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="/">Home</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

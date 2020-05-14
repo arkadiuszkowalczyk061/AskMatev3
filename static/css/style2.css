@@ -27,11 +27,10 @@ body ,html{
     box-shadow: 3px 3px 30px 5px rgba(33,179,184,1);
 }
 
-input[type=text],
-input[type=password]
+input[type=text]
 {
     width: 300px;
-    background-color: #FFFFFF;
+    background: url('../img/blue-pill.jpg');
     color: #666;
     border:2px solid #dddddd;
     border-radius: 5px;
@@ -40,6 +39,24 @@ input[type=password]
     box-sizing: border-box;
     outline: none;
     margin-top: 15px;
+    background-position-x: -51px;
+    background-position-y: -34px;
+}
+
+input[type=password]
+{
+    width: 300px;
+    background: url('../img/blue-pill.jpg');
+    color: #666;
+    border:2px solid #dddddd;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 15px;
+    background-position-x: -51px;
+    background-position-y: -137px;
 }
 input[type=text]:focus,
 input[type=password]:focus {
@@ -130,4 +147,16 @@ input:focus::-webkit-input-placeholder {
     width: 100%;
 
     font-size: 36px;
+}
+.login-choose{
+    background: #1ac6ff;
+    margin-left: 300px;
+    height: 400px;
+    background-position-y: 250px;
+    position: center;
+}
+.register-choose{
+    margin-left: 500px;
+    margin-bottom: 500px;
+    vertical-align: super;
 }

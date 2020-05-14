@@ -1,63 +1,75 @@
 <head>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}", media="all"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stachu.css') }}", media="all"/>
 </head>
     <a href="{{ url_for('index') }}">HOME PAGE</a><br>
     <a type="submit" href="{{ url_for('delete_question', id=id) }}"><button>DELETE</button></a>
 <title>{{ title }}</title>
 
 {% block content %}
-
-    <h2 id="display_question_title">{{ title }}</h2>
-    <label for="display_question_message">{{ message }}
-    <form id="edit_question" action="{{ url_for('edit_question', id=id) }}" method="get">
+<div class="question-container">
+    <div class="title-box">
+        <h2 id="display_question_title">{{ title }}</h2>
+    </div>
+    <div class="message-box">
+    <label for="display_question_message">{{ message }}>
+    <form class="edit" action="{{ url_for('edit_question', id=id) }}" method="get">
         <input type="image" id="edit_question" name="edit_question" src="https://pngimage.net/wp-content/uploads/2018/05/edit-button-icon-png-5.png" border="0" height="1.5%" alt="Submit">
     </form>
-    <form action="{{ url_for('vote_manager', id=id) }}" method="post">
-        <input type="hidden" id="table" name="table" value="questions">
-        <input type="hidden" id="vote_operation" name="vote_operation" value="increase">
-        <input type="image" id="thumbs-up" name="thumbs-up" src="/static/output-onlinepngtools (4).png" border="0" height="1.5%" alt="Submit">
-    </form>
-    <form action="{{ url_for('vote_manager', id=id) }}" method="post">
-        <input type="hidden" id="table" name="table" value="questions">
-        <input type="hidden" id="vote_operation" name="vote_operation" value="decrease">
-        <input type="image" id="thumbs-up" name="thumbs-up" src="/static/output-onlinepngtools (5).png" border="0" height="2%" alt="Submit">
-    </form>
-        {% for dict in question_votes %}
-            {{ dict['vote_number'] }}
-        {% endfor %}
     </label>
+    </div>
+    <div class="voting_question">
+        <div class="container">
+        <form class='vote_up' action="{{ url_for('vote_manager', id=id) }}" method="post">
+            <input type="hidden" id="table" name="table" value="questions">
+            <input type="hidden" id="vote_operation" name="vote_operation" value="increase">
+            <input type="image" id="thumbs-up" name="thumbs-up" src="/static/output-onlinepngtools (4).png" border="0" height="1.5%" alt="Submit">
+        </form>
+        <form class='vote_down' action="{{ url_for('vote_manager', id=id) }}" method="post">
+            <input type="hidden" id="table" name="table" value="questions">
+            <input type="hidden" id="vote_operation" name="vote_operation" value="decrease">
+            <input type="image" id="thumbs-up" name="thumbs-up" src="/static/output-onlinepngtools (5).png" border="0" height="2%" alt="Submit">
+        </form>
+            <p>{% for dict in question_votes %}
+                {{ dict['vote_number'] }}
+            {% endfor %}</p>
+        </div>
+    </div>
+    <div class="answer-box">
     <h3>Answers:</h3>
     {% for answer in answers %}
         {% for key, value in answer.items() %}
             {% if key == 'message' and answer.get('question_id') == id%}
 
-                <label for="delete_answer"> {{ answer.get(key) }}
+                <label for="delete_answer"> <p id="answer">{{ answer.get(key) }}</p>
                     <form id="delete_answer" action="{{ url_for('delete_answer', answer_id=answer.id, id=id) }}" method="post">
                         <input type="image" id="delete_answer" name="delete_answer" src="https://cdn.pixabay.com/photo/2012/04/12/20/12/x-30465_960_720.png" border="0" height="1.5%" alt="Submit" />
                     </form>
 
-                    <form id="edit_answer" action="{{ url_for('edit_answer', id=id, answer_id=answer.id) }}" method="get">
+                    <form class="edit" action="{{ url_for('edit_answer', id=id, answer_id=answer.id) }}" method="get">
                         <input type="image" id="edit_answer" name="edit_answer" src="https://pngimage.net/wp-content/uploads/2018/05/edit-button-icon-png-5.png" border="0" height="1.5%" alt="Submit">
                     </form> <br>
                 </label>
-
-                <form action="{{ url_for('vote_manager', id=id, answer_id=answer['id']) }}" method="post">
+            <div class="voting">
+                <div class="container">
+                <form class='vote_up' action="{{ url_for('vote_manager', id=id, answer_id=answer['id']) }}" method="post">
                     <input type="hidden" id="table" name="table" value="answers">
                     <input type="hidden" id="vote_operation" name="vote_operation" value="increase">
                     <input type="image" id="thumbs-up" name="thumbs-up" src="/static/output-onlinepngtools (4).png" border="0" height="1.5%" alt="Submit">
                 </form>
-                <form action="{{ url_for('vote_manager', id=id, answer_id=answer['id']) }}" method="post">
+                <form class='vote_down' action="{{ url_for('vote_manager', id=id, answer_id=answer['id']) }}" method="post">
                     <input type="hidden" id="table" name="table" value="answers">
                     <input type="hidden" id="vote_operation" name="vote_operation" value="decrease">
-                    <input type="image" id="thumbs-up" name="thumbs-up" src="/static/output-onlinepngtools (5).png" border="0" height="2%" alt="Submit">
+                    <input type="image" id="thumbs-down" name="thumbs-up" src="/static/output-onlinepngtools (5).png" border="0" height="2%" alt="Submit">
                 </form>
-
+                <p id="answer-count">
                 {% for answer_votes in answers_votes %}
                     {% if answer_votes['id'] == answer['id'] %}
                         {{ answer_votes['vote_number'] }}
                     {% endif %}
-                {% endfor %}<br>
-
+                {% endfor %}</p><br>
+                </div>
+            </div>
+                <div class="comment-box">
                 {% for comment in comments %}
                     {% if comment.question_id == id and comment.answer_id == answer.id %}
                         <label id="comment" for="comment" > {{ comment.message }}
@@ -71,15 +83,16 @@
                 <form action="{{ url_for('add_comment', question_id=id, answer_id=answer.id) }}" method="post">
                     <input type="text" name="comment" id="comment" alt="submit">
                 </form>
-
+                </div>
             {% endif %}
         {% endfor %}
     {% endfor %}
-
-
-    <form action="{{ url_for('add_answer', id=id) }}" method="post">
+    </div>
+</div>
+    <form id="add_answer" action="{{ url_for('add_answer', id=id) }}" method="post">
         <label>Add an answer</label><br>
         <textarea name="Answer" id="Answer" rows="5" cols="60"></textarea><br>
         <button id="button_submit2" type="submit"> Submit </button>
     </form>
+
 {% endblock content %}
