@@ -36,31 +36,34 @@
                 </ul>
                 </div>
             </nav>
-        <div>
-            <table class="table">
-                {% for key, value in titles.items() %}
-                    <th>{{ value }}<br>
-                        <form action="{{ url_for('sort_questions') }}" method="post">
-                        <input type="hidden" name="order_by" value="{{ key }}">
-                        <select onchange="this.form.submit()" id="order" name="order">
-                            <option value="ASC">ASCENDING</option>
-                            <option value="DESC">DESCENDING</option>
-                        </select>
-                    </form>
-                    </th>
-                {% endfor %}
-                {% for dictionary in questions %}
-                    <tr>
-                        {% for key, value in dictionary.items() %}
-                            {% if key != 'id' and key !='title' and key !='image' %}
-                                <td>{{ dictionary.get(key) }}</td>
-                            {% elif key =='title' %}
-                                <td><a href="{{ url_for('display_question', id = dictionary['id']) }}">{{ dictionary.get(key) }}</a></td>
-                            {% endif %}
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
+
+        <div class="question_table">
+            <div class="container">
+                <table class="table">
+                    {% for key, value in titles.items() %}
+                        <th>{{ value }}<br>
+                            <form action="{{ url_for('sort_questions') }}" method="post">
+                            <input type="hidden" name="order_by" value="{{ key }}">
+                            <select onchange="this.form.submit()" id="order" name="order">
+                                <option value="ASC">ASCENDING</option>
+                                <option value="DESC">DESCENDING</option>
+                            </select>
+                        </form>
+                        </th>
+                    {% endfor %}
+                    {% for dictionary in questions %}
+                        <tr>
+                            {% for key, value in dictionary.items() %}
+                                {% if key != 'id' and key !='title' and key !='image' %}
+                                    <td>{{ dictionary.get(key) }}</td>
+                                {% elif key =='title' %}
+                                    <td><a href="{{ url_for('display_question', id = dictionary['id']) }}">{{ dictionary.get(key) }}</a></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         </div>
 
     {% endblock %}

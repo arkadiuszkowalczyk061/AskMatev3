@@ -60,11 +60,36 @@ body{
     background-color: #ffdd99;
 }
 
-.table td {
-    background-color: #ffffb3;
-    color:black;
+
+.table {
+    margin-top: 100px;
+    border-collapse: separate;
+    border:solid black 1px;
+    border-radius: 15px;
+    border-spacing: 0;
+    overflow: hidden;
+    display: inline-block;
 }
 
+
+.table td {
+    text-align: center;
+    vertical-align: middle;
+    horiz-align: center;
+    color:black;
+    padding-right: 50px;
+    padding-bottom: 25px;
+}
+
+.table tr:nth-child(even){
+    background: floralwhite;
+}
+
+.table tr:nth-child(odd){
+    background: #f6f6f6;
+}
+
+
 .table th {
-    background: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg") ;
+    background-color: #ffdd99;
 }
