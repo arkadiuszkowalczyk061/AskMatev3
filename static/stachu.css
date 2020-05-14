@@ -171,3 +171,57 @@ body {
 #add_answer{
     padding-left: 10px;
 }
+
+.nav-bar {
+    /*background-color: #ccb3ff;*/
+    background: url("https://www.epicentrofestival.com/wp-content/uploads/2020/01/epicentrofestival-desktop-wallpaper-sky-computer-pattern-light-blue-abstract-background-png-eockz6n8av-720x416.jpg");
+    text-align: center;
+}
+
+.nav-bar ul {
+    padding: 0;
+    list-style: none;
+
+}
+
+.nav-bar li {
+    display: inline;
+}
+
+.nav-bar form {
+    display: inline;
+    padding-left: 20px;
+}
+
+.nav-bar a{
+    color: white;
+    text-decoration: none;
+    font-size: 36px;
+    padding-right: 15px;
+}
+
+.search_bar {
+    padding-top: 7px;
+    padding-left: 20px;
+    margin-left: 35px;
+}
+.search_button {
+    height: 35px;
+    width: 80px;
+    background-color: dodgerblue;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 8px;
+    border: none;
+    color: floralwhite;
+
+}
+
+.search_button:hover {
+    background-color: red;
+}
+/*.container{*/
+/*    width: 80%;*/
+/*    margin: auto;*/
+/*    overflow: hidden;*/
+/*}*/

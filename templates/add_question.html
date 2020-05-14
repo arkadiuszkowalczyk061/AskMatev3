@@ -1,4 +1,3 @@
-{% extends 'layout.html' %}
 {% block header %}
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stachu.css') }}" media="all"/>
@@ -6,6 +5,7 @@
 {% endblock header %}
 {% block content %}
     <body>
+    {% include 'layout.html' %}
     {% if message %}
         <p>{{ message }}</p>
     {% endif %}
